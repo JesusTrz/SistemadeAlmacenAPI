@@ -1,0 +1,1324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Sistema_de_AlmacenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="ID_Articulo" />
+          </Key>
+          <Property Name="ID_Articulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Articulo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion_Articulo" Type="nvarchar" MaxLength="250" />
+          <Property Name="Numero_Parte" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ID_Linea" Type="int" />
+          <Property Name="ID_Medida" Type="int" />
+          <Property Name="Unidad" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Centro_Costo">
+          <Key>
+            <PropertyRef Name="ID_CenCost" />
+          </Key>
+          <Property Name="ID_CenCost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_CenCost" Type="nvarchar" MaxLength="100" />
+          <Property Name="Descripcion_CenCost" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="ID_Cuenta" />
+          </Key>
+          <Property Name="ID_Cuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Cuenta" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cuenta_Entrada" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cuenta_Salida" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Detalle_Entrada">
+          <Key>
+            <PropertyRef Name="ID_DetalleEntrada" />
+          </Key>
+          <Property Name="ID_DetalleEntrada" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Entradas" Type="int" />
+          <Property Name="ID_Articulo" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Precio_Unitario" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Detalle_Salida">
+          <Key>
+            <PropertyRef Name="ID_DetalleSalida" />
+          </Key>
+          <Property Name="ID_DetalleSalida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Salida" Type="int" />
+          <Property Name="ID_Articulo" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Precio_Unitario" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Entradas">
+          <Key>
+            <PropertyRef Name="ID_Entradas" />
+          </Key>
+          <Property Name="ID_Entradas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="Hora" Type="time" Precision="7" />
+          <Property Name="ID_Movimiento" Type="int" />
+          <Property Name="ID_Proveedores" Type="int" />
+          <Property Name="Comentarios" Type="nvarchar" MaxLength="250" />
+          <Property Name="ID_Sede" Type="int" />
+        </EntityType>
+        <EntityType Name="Inventario">
+          <Key>
+            <PropertyRef Name="ID_Inventario" />
+          </Key>
+          <Property Name="ID_Inventario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Sede" Type="int" />
+          <Property Name="ID_Articulo" Type="int" />
+          <Property Name="Stock_Actual" Type="int" />
+          <Property Name="Stock_Minimo" Type="int" />
+          <Property Name="Stock_Maximo" Type="int" />
+          <Property Name="Ubicacion" Type="nvarchar" MaxLength="60" />
+          <Property Name="Costo_Promedio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Saldo" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Ultimo_Costo" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Ultima_Compra" Type="date" />
+        </EntityType>
+        <EntityType Name="Linea">
+          <Key>
+            <PropertyRef Name="ID_Linea" />
+          </Key>
+          <Property Name="ID_Linea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Linea" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion_Linea" Type="nvarchar" MaxLength="250" />
+          <Property Name="ID_Cuenta" Type="int" />
+        </EntityType>
+        <EntityType Name="Movimientos">
+          <Key>
+            <PropertyRef Name="ID_Movimiento" />
+          </Key>
+          <Property Name="ID_Movimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Movimiento" Type="nvarchar" MaxLength="100" />
+          <Property Name="Descripcion_Movimiento" Type="nvarchar" MaxLength="250" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Personal">
+          <Key>
+            <PropertyRef Name="ID_Personal" />
+          </Key>
+          <Property Name="ID_Personal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="Apellidos" Type="nvarchar" MaxLength="100" />
+          <Property Name="ID_Sede" Type="int" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="ID_Proveedores" />
+          </Key>
+          <Property Name="ID_Proveedores" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RFC" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Razon_Social" Type="nvarchar" MaxLength="100" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="250" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID_Roles" />
+          </Key>
+          <Property Name="ID_Roles" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Rol" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salidas">
+          <Key>
+            <PropertyRef Name="ID_Salida" />
+          </Key>
+          <Property Name="ID_Salida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="Hora" Type="time" Precision="7" />
+          <Property Name="ID_Movimiento" Type="int" />
+          <Property Name="ID_CenCost" Type="int" />
+          <Property Name="ID_Unidad" Type="int" />
+          <Property Name="ID_Personal" Type="int" />
+          <Property Name="Comentarios" Type="nvarchar" MaxLength="250" />
+          <Property Name="ID_Sede" Type="int" />
+        </EntityType>
+        <EntityType Name="Sedes">
+          <Key>
+            <PropertyRef Name="ID_Sede" />
+          </Key>
+          <Property Name="ID_Sede" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Sede" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Unidades">
+          <Key>
+            <PropertyRef Name="ID_Unidad" />
+          </Key>
+          <Property Name="ID_Unidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero_Placa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Descripcion_Unidad" Type="nvarchar" MaxLength="250" />
+          <Property Name="ID_Sede" Type="int" />
+        </EntityType>
+        <EntityType Name="Unidades_Medida">
+          <Key>
+            <PropertyRef Name="ID_Medida" />
+          </Key>
+          <Property Name="ID_Medida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Unidad" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="ID_Usuario" />
+          </Key>
+          <Property Name="ID_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Usuario" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contrasenia" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ID_Roles" Type="int" />
+          <Property Name="ID_Sede" Type="int" />
+        </EntityType>
+        <Association Name="FK__Articulo__ID_Lin__45F365D3">
+          <End Role="Linea" Type="Self.Linea" Multiplicity="0..1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="ID_Linea" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="ID_Linea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Articulo__ID_Med__46E78A0C">
+          <End Role="Unidades_Medida" Type="Self.Unidades_Medida" Multiplicity="0..1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unidades_Medida">
+              <PropertyRef Name="ID_Medida" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="ID_Medida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_E__ID_Ar__5812160E">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Detalle_Entrada" Type="Self.Detalle_Entrada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="ID_Articulo" />
+            </Principal>
+            <Dependent Role="Detalle_Entrada">
+              <PropertyRef Name="ID_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_E__ID_En__571DF1D5">
+          <End Role="Entradas" Type="Self.Entradas" Multiplicity="0..1" />
+          <End Role="Detalle_Entrada" Type="Self.Detalle_Entrada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entradas">
+              <PropertyRef Name="ID_Entradas" />
+            </Principal>
+            <Dependent Role="Detalle_Entrada">
+              <PropertyRef Name="ID_Entradas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_S__ID_Ar__6A30C649">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Detalle_Salida" Type="Self.Detalle_Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="ID_Articulo" />
+            </Principal>
+            <Dependent Role="Detalle_Salida">
+              <PropertyRef Name="ID_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_S__ID_Sa__693CA210">
+          <End Role="Salidas" Type="Self.Salidas" Multiplicity="0..1" />
+          <End Role="Detalle_Salida" Type="Self.Detalle_Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salidas">
+              <PropertyRef Name="ID_Salida" />
+            </Principal>
+            <Dependent Role="Detalle_Salida">
+              <PropertyRef Name="ID_Salida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Entradas__ID_Mov__52593CB8">
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="0..1" />
+          <End Role="Entradas" Type="Self.Entradas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimientos">
+              <PropertyRef Name="ID_Movimiento" />
+            </Principal>
+            <Dependent Role="Entradas">
+              <PropertyRef Name="ID_Movimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Entradas__ID_Pro__534D60F1">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+          <End Role="Entradas" Type="Self.Entradas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ID_Proveedores" />
+            </Principal>
+            <Dependent Role="Entradas">
+              <PropertyRef Name="ID_Proveedores" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Entradas__ID_Sed__5441852A">
+          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
+          <End Role="Entradas" Type="Self.Entradas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Entradas">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventari__ID_Ar__4AB81AF0">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="ID_Articulo" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="ID_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventari__ID_Se__49C3F6B7">
+          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Linea__ID_Cuenta__412EB0B6">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1" />
+          <End Role="Linea" Type="Self.Linea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="ID_Cuenta" />
+            </Principal>
+            <Dependent Role="Linea">
+              <PropertyRef Name="ID_Cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personal__ID_Sed__5FB337D6">
+          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salidas__ID_CenC__6383C8BA">
+          <End Role="Centro_Costo" Type="Self.Centro_Costo" Multiplicity="0..1" />
+          <End Role="Salidas" Type="Self.Salidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Centro_Costo">
+              <PropertyRef Name="ID_CenCost" />
+            </Principal>
+            <Dependent Role="Salidas">
+              <PropertyRef Name="ID_CenCost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salidas__ID_Movi__628FA481">
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="0..1" />
+          <End Role="Salidas" Type="Self.Salidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimientos">
+              <PropertyRef Name="ID_Movimiento" />
+            </Principal>
+            <Dependent Role="Salidas">
+              <PropertyRef Name="ID_Movimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salidas__ID_Pers__656C112C">
+          <End Role="Personal" Type="Self.Personal" Multiplicity="0..1" />
+          <End Role="Salidas" Type="Self.Salidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal">
+              <PropertyRef Name="ID_Personal" />
+            </Principal>
+            <Dependent Role="Salidas">
+              <PropertyRef Name="ID_Personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salidas__ID_Sede__66603565">
+          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
+          <End Role="Salidas" Type="Self.Salidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Salidas">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salidas__ID_Unid__6477ECF3">
+          <End Role="Unidades" Type="Self.Unidades" Multiplicity="0..1" />
+          <End Role="Salidas" Type="Self.Salidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unidades">
+              <PropertyRef Name="ID_Unidad" />
+            </Principal>
+            <Dependent Role="Salidas">
+              <PropertyRef Name="ID_Unidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Unidades__ID_Sed__5CD6CB2B">
+          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
+          <End Role="Unidades" Type="Self.Unidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Unidades">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__ID_Rol__3B75D760">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID_Roles" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="ID_Roles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__ID_Sed__3C69FB99">
+          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Sistema_de_AlmacenModelStoreContainer">
+          <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Centro_Costo" EntityType="Self.Centro_Costo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detalle_Entrada" EntityType="Self.Detalle_Entrada" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detalle_Salida" EntityType="Self.Detalle_Salida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entradas" EntityType="Self.Entradas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventario" EntityType="Self.Inventario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Linea" EntityType="Self.Linea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimientos" EntityType="Self.Movimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personal" EntityType="Self.Personal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salidas" EntityType="Self.Salidas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sedes" EntityType="Self.Sedes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unidades" EntityType="Self.Unidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unidades_Medida" EntityType="Self.Unidades_Medida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Articulo__ID_Lin__45F365D3" Association="Self.FK__Articulo__ID_Lin__45F365D3">
+            <End Role="Linea" EntitySet="Linea" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Articulo__ID_Med__46E78A0C" Association="Self.FK__Articulo__ID_Med__46E78A0C">
+            <End Role="Unidades_Medida" EntitySet="Unidades_Medida" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_E__ID_Ar__5812160E" Association="Self.FK__Detalle_E__ID_Ar__5812160E">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Detalle_Entrada" EntitySet="Detalle_Entrada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_E__ID_En__571DF1D5" Association="Self.FK__Detalle_E__ID_En__571DF1D5">
+            <End Role="Entradas" EntitySet="Entradas" />
+            <End Role="Detalle_Entrada" EntitySet="Detalle_Entrada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_S__ID_Ar__6A30C649" Association="Self.FK__Detalle_S__ID_Ar__6A30C649">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Detalle_Salida" EntitySet="Detalle_Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_S__ID_Sa__693CA210" Association="Self.FK__Detalle_S__ID_Sa__693CA210">
+            <End Role="Salidas" EntitySet="Salidas" />
+            <End Role="Detalle_Salida" EntitySet="Detalle_Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Entradas__ID_Mov__52593CB8" Association="Self.FK__Entradas__ID_Mov__52593CB8">
+            <End Role="Movimientos" EntitySet="Movimientos" />
+            <End Role="Entradas" EntitySet="Entradas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Entradas__ID_Pro__534D60F1" Association="Self.FK__Entradas__ID_Pro__534D60F1">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Entradas" EntitySet="Entradas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Entradas__ID_Sed__5441852A" Association="Self.FK__Entradas__ID_Sed__5441852A">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Entradas" EntitySet="Entradas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventari__ID_Ar__4AB81AF0" Association="Self.FK__Inventari__ID_Ar__4AB81AF0">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventari__ID_Se__49C3F6B7" Association="Self.FK__Inventari__ID_Se__49C3F6B7">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Linea__ID_Cuenta__412EB0B6" Association="Self.FK__Linea__ID_Cuenta__412EB0B6">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Linea" EntitySet="Linea" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personal__ID_Sed__5FB337D6" Association="Self.FK__Personal__ID_Sed__5FB337D6">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salidas__ID_CenC__6383C8BA" Association="Self.FK__Salidas__ID_CenC__6383C8BA">
+            <End Role="Centro_Costo" EntitySet="Centro_Costo" />
+            <End Role="Salidas" EntitySet="Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salidas__ID_Movi__628FA481" Association="Self.FK__Salidas__ID_Movi__628FA481">
+            <End Role="Movimientos" EntitySet="Movimientos" />
+            <End Role="Salidas" EntitySet="Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salidas__ID_Pers__656C112C" Association="Self.FK__Salidas__ID_Pers__656C112C">
+            <End Role="Personal" EntitySet="Personal" />
+            <End Role="Salidas" EntitySet="Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salidas__ID_Sede__66603565" Association="Self.FK__Salidas__ID_Sede__66603565">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Salidas" EntitySet="Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salidas__ID_Unid__6477ECF3" Association="Self.FK__Salidas__ID_Unid__6477ECF3">
+            <End Role="Unidades" EntitySet="Unidades" />
+            <End Role="Salidas" EntitySet="Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Unidades__ID_Sed__5CD6CB2B" Association="Self.FK__Unidades__ID_Sed__5CD6CB2B">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Unidades" EntitySet="Unidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__ID_Rol__3B75D760" Association="Self.FK__Usuarios__ID_Rol__3B75D760">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__ID_Sed__3C69FB99" Association="Self.FK__Usuarios__ID_Sed__3C69FB99">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Sistema_de_AlmacenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="ID_Articulo" />
+          </Key>
+          <Property Name="ID_Articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Articulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion_Articulo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Numero_Parte" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_Linea" Type="Int32" />
+          <Property Name="ID_Medida" Type="Int32" />
+          <Property Name="Unidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Linea" Relationship="Self.FK__Articulo__ID_Lin__45F365D3" FromRole="Articulo" ToRole="Linea" />
+          <NavigationProperty Name="Unidades_Medida" Relationship="Self.FK__Articulo__ID_Med__46E78A0C" FromRole="Articulo" ToRole="Unidades_Medida" />
+          <NavigationProperty Name="Detalle_Entrada" Relationship="Self.FK__Detalle_E__ID_Ar__5812160E" FromRole="Articulo" ToRole="Detalle_Entrada" />
+          <NavigationProperty Name="Detalle_Salida" Relationship="Self.FK__Detalle_S__ID_Ar__6A30C649" FromRole="Articulo" ToRole="Detalle_Salida" />
+          <NavigationProperty Name="Inventario" Relationship="Self.FK__Inventari__ID_Ar__4AB81AF0" FromRole="Articulo" ToRole="Inventario" />
+        </EntityType>
+        <EntityType Name="Centro_Costo">
+          <Key>
+            <PropertyRef Name="ID_CenCost" />
+          </Key>
+          <Property Name="ID_CenCost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_CenCost" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion_CenCost" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Salidas" Relationship="Self.FK__Salidas__ID_CenC__6383C8BA" FromRole="Centro_Costo" ToRole="Salidas" />
+        </EntityType>
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="ID_Cuenta" />
+          </Key>
+          <Property Name="ID_Cuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cuenta_Entrada" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_Salida" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Linea" Relationship="Self.FK__Linea__ID_Cuenta__412EB0B6" FromRole="Cuenta" ToRole="Linea" />
+        </EntityType>
+        <EntityType Name="Detalle_Entrada">
+          <Key>
+            <PropertyRef Name="ID_DetalleEntrada" />
+          </Key>
+          <Property Name="ID_DetalleEntrada" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Entradas" Type="Int32" />
+          <Property Name="ID_Articulo" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Precio_Unitario" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK__Detalle_E__ID_Ar__5812160E" FromRole="Detalle_Entrada" ToRole="Articulo" />
+          <NavigationProperty Name="Entradas" Relationship="Self.FK__Detalle_E__ID_En__571DF1D5" FromRole="Detalle_Entrada" ToRole="Entradas" />
+        </EntityType>
+        <EntityType Name="Detalle_Salida">
+          <Key>
+            <PropertyRef Name="ID_DetalleSalida" />
+          </Key>
+          <Property Name="ID_DetalleSalida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Salida" Type="Int32" />
+          <Property Name="ID_Articulo" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Precio_Unitario" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK__Detalle_S__ID_Ar__6A30C649" FromRole="Detalle_Salida" ToRole="Articulo" />
+          <NavigationProperty Name="Salidas" Relationship="Self.FK__Detalle_S__ID_Sa__693CA210" FromRole="Detalle_Salida" ToRole="Salidas" />
+        </EntityType>
+        <EntityType Name="Entradas">
+          <Key>
+            <PropertyRef Name="ID_Entradas" />
+          </Key>
+          <Property Name="ID_Entradas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Hora" Type="Time" Precision="7" />
+          <Property Name="ID_Movimiento" Type="Int32" />
+          <Property Name="ID_Proveedores" Type="Int32" />
+          <Property Name="Comentarios" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Sede" Type="Int32" />
+          <NavigationProperty Name="Detalle_Entrada" Relationship="Self.FK__Detalle_E__ID_En__571DF1D5" FromRole="Entradas" ToRole="Detalle_Entrada" />
+          <NavigationProperty Name="Movimientos" Relationship="Self.FK__Entradas__ID_Mov__52593CB8" FromRole="Entradas" ToRole="Movimientos" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK__Entradas__ID_Pro__534D60F1" FromRole="Entradas" ToRole="Proveedores" />
+          <NavigationProperty Name="Sedes" Relationship="Self.FK__Entradas__ID_Sed__5441852A" FromRole="Entradas" ToRole="Sedes" />
+        </EntityType>
+        <EntityType Name="Inventario">
+          <Key>
+            <PropertyRef Name="ID_Inventario" />
+          </Key>
+          <Property Name="ID_Inventario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Sede" Type="Int32" />
+          <Property Name="ID_Articulo" Type="Int32" />
+          <Property Name="Stock_Actual" Type="Int32" />
+          <Property Name="Stock_Minimo" Type="Int32" />
+          <Property Name="Stock_Maximo" Type="Int32" />
+          <Property Name="Ubicacion" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Costo_Promedio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Saldo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Ultimo_Costo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Ultima_Compra" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK__Inventari__ID_Ar__4AB81AF0" FromRole="Inventario" ToRole="Articulo" />
+          <NavigationProperty Name="Sedes" Relationship="Self.FK__Inventari__ID_Se__49C3F6B7" FromRole="Inventario" ToRole="Sedes" />
+        </EntityType>
+        <EntityType Name="Linea">
+          <Key>
+            <PropertyRef Name="ID_Linea" />
+          </Key>
+          <Property Name="ID_Linea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion_Linea" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Cuenta" Type="Int32" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK__Articulo__ID_Lin__45F365D3" FromRole="Linea" ToRole="Articulo" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK__Linea__ID_Cuenta__412EB0B6" FromRole="Linea" ToRole="Cuenta" />
+        </EntityType>
+        <EntityType Name="Movimientos">
+          <Key>
+            <PropertyRef Name="ID_Movimiento" />
+          </Key>
+          <Property Name="ID_Movimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Movimiento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion_Movimiento" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Entradas" Relationship="Self.FK__Entradas__ID_Mov__52593CB8" FromRole="Movimientos" ToRole="Entradas" />
+          <NavigationProperty Name="Salidas" Relationship="Self.FK__Salidas__ID_Movi__628FA481" FromRole="Movimientos" ToRole="Salidas" />
+        </EntityType>
+        <EntityType Name="Personal">
+          <Key>
+            <PropertyRef Name="ID_Personal" />
+          </Key>
+          <Property Name="ID_Personal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Sede" Type="Int32" />
+          <NavigationProperty Name="Sedes" Relationship="Self.FK__Personal__ID_Sed__5FB337D6" FromRole="Personal" ToRole="Sedes" />
+          <NavigationProperty Name="Salidas" Relationship="Self.FK__Salidas__ID_Pers__656C112C" FromRole="Personal" ToRole="Salidas" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="ID_Proveedores" />
+          </Key>
+          <Property Name="ID_Proveedores" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RFC" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Razon_Social" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Entradas" Relationship="Self.FK__Entradas__ID_Pro__534D60F1" FromRole="Proveedores" ToRole="Entradas" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID_Roles" />
+          </Key>
+          <Property Name="ID_Roles" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__ID_Rol__3B75D760" FromRole="Roles" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Salidas">
+          <Key>
+            <PropertyRef Name="ID_Salida" />
+          </Key>
+          <Property Name="ID_Salida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Hora" Type="Time" Precision="7" />
+          <Property Name="ID_Movimiento" Type="Int32" />
+          <Property Name="ID_CenCost" Type="Int32" />
+          <Property Name="ID_Unidad" Type="Int32" />
+          <Property Name="ID_Personal" Type="Int32" />
+          <Property Name="Comentarios" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Sede" Type="Int32" />
+          <NavigationProperty Name="Centro_Costo" Relationship="Self.FK__Salidas__ID_CenC__6383C8BA" FromRole="Salidas" ToRole="Centro_Costo" />
+          <NavigationProperty Name="Detalle_Salida" Relationship="Self.FK__Detalle_S__ID_Sa__693CA210" FromRole="Salidas" ToRole="Detalle_Salida" />
+          <NavigationProperty Name="Movimientos" Relationship="Self.FK__Salidas__ID_Movi__628FA481" FromRole="Salidas" ToRole="Movimientos" />
+          <NavigationProperty Name="Personal" Relationship="Self.FK__Salidas__ID_Pers__656C112C" FromRole="Salidas" ToRole="Personal" />
+          <NavigationProperty Name="Sedes" Relationship="Self.FK__Salidas__ID_Sede__66603565" FromRole="Salidas" ToRole="Sedes" />
+          <NavigationProperty Name="Unidades" Relationship="Self.FK__Salidas__ID_Unid__6477ECF3" FromRole="Salidas" ToRole="Unidades" />
+        </EntityType>
+        <EntityType Name="Sedes">
+          <Key>
+            <PropertyRef Name="ID_Sede" />
+          </Key>
+          <Property Name="ID_Sede" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Sede" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Entradas" Relationship="Self.FK__Entradas__ID_Sed__5441852A" FromRole="Sedes" ToRole="Entradas" />
+          <NavigationProperty Name="Inventario" Relationship="Self.FK__Inventari__ID_Se__49C3F6B7" FromRole="Sedes" ToRole="Inventario" />
+          <NavigationProperty Name="Personal" Relationship="Self.FK__Personal__ID_Sed__5FB337D6" FromRole="Sedes" ToRole="Personal" />
+          <NavigationProperty Name="Salidas" Relationship="Self.FK__Salidas__ID_Sede__66603565" FromRole="Sedes" ToRole="Salidas" />
+          <NavigationProperty Name="Unidades" Relationship="Self.FK__Unidades__ID_Sed__5CD6CB2B" FromRole="Sedes" ToRole="Unidades" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__ID_Sed__3C69FB99" FromRole="Sedes" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Unidades">
+          <Key>
+            <PropertyRef Name="ID_Unidad" />
+          </Key>
+          <Property Name="ID_Unidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero_Placa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion_Unidad" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Sede" Type="Int32" />
+          <NavigationProperty Name="Salidas" Relationship="Self.FK__Salidas__ID_Unid__6477ECF3" FromRole="Unidades" ToRole="Salidas" />
+          <NavigationProperty Name="Sedes" Relationship="Self.FK__Unidades__ID_Sed__5CD6CB2B" FromRole="Unidades" ToRole="Sedes" />
+        </EntityType>
+        <EntityType Name="Unidades_Medida">
+          <Key>
+            <PropertyRef Name="ID_Medida" />
+          </Key>
+          <Property Name="ID_Medida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Unidad" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK__Articulo__ID_Med__46E78A0C" FromRole="Unidades_Medida" ToRole="Articulo" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="ID_Usuario" />
+          </Key>
+          <Property Name="ID_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contrasenia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_Roles" Type="Int32" />
+          <Property Name="ID_Sede" Type="Int32" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Usuarios__ID_Rol__3B75D760" FromRole="Usuarios" ToRole="Roles" />
+          <NavigationProperty Name="Sedes" Relationship="Self.FK__Usuarios__ID_Sed__3C69FB99" FromRole="Usuarios" ToRole="Sedes" />
+        </EntityType>
+        <Association Name="FK__Articulo__ID_Lin__45F365D3">
+          <End Role="Linea" Type="Self.Linea" Multiplicity="0..1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="ID_Linea" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="ID_Linea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Articulo__ID_Med__46E78A0C">
+          <End Role="Unidades_Medida" Type="Self.Unidades_Medida" Multiplicity="0..1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unidades_Medida">
+              <PropertyRef Name="ID_Medida" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="ID_Medida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_E__ID_Ar__5812160E">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Detalle_Entrada" Type="Self.Detalle_Entrada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="ID_Articulo" />
+            </Principal>
+            <Dependent Role="Detalle_Entrada">
+              <PropertyRef Name="ID_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_S__ID_Ar__6A30C649">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Detalle_Salida" Type="Self.Detalle_Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="ID_Articulo" />
+            </Principal>
+            <Dependent Role="Detalle_Salida">
+              <PropertyRef Name="ID_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventari__ID_Ar__4AB81AF0">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="ID_Articulo" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="ID_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salidas__ID_CenC__6383C8BA">
+          <End Role="Centro_Costo" Type="Self.Centro_Costo" Multiplicity="0..1" />
+          <End Role="Salidas" Type="Self.Salidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Centro_Costo">
+              <PropertyRef Name="ID_CenCost" />
+            </Principal>
+            <Dependent Role="Salidas">
+              <PropertyRef Name="ID_CenCost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Linea__ID_Cuenta__412EB0B6">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1" />
+          <End Role="Linea" Type="Self.Linea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="ID_Cuenta" />
+            </Principal>
+            <Dependent Role="Linea">
+              <PropertyRef Name="ID_Cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_E__ID_En__571DF1D5">
+          <End Role="Entradas" Type="Self.Entradas" Multiplicity="0..1" />
+          <End Role="Detalle_Entrada" Type="Self.Detalle_Entrada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entradas">
+              <PropertyRef Name="ID_Entradas" />
+            </Principal>
+            <Dependent Role="Detalle_Entrada">
+              <PropertyRef Name="ID_Entradas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_S__ID_Sa__693CA210">
+          <End Role="Salidas" Type="Self.Salidas" Multiplicity="0..1" />
+          <End Role="Detalle_Salida" Type="Self.Detalle_Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salidas">
+              <PropertyRef Name="ID_Salida" />
+            </Principal>
+            <Dependent Role="Detalle_Salida">
+              <PropertyRef Name="ID_Salida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Entradas__ID_Mov__52593CB8">
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="0..1" />
+          <End Role="Entradas" Type="Self.Entradas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimientos">
+              <PropertyRef Name="ID_Movimiento" />
+            </Principal>
+            <Dependent Role="Entradas">
+              <PropertyRef Name="ID_Movimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Entradas__ID_Pro__534D60F1">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+          <End Role="Entradas" Type="Self.Entradas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ID_Proveedores" />
+            </Principal>
+            <Dependent Role="Entradas">
+              <PropertyRef Name="ID_Proveedores" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Entradas__ID_Sed__5441852A">
+          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
+          <End Role="Entradas" Type="Self.Entradas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Entradas">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventari__ID_Se__49C3F6B7">
+          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salidas__ID_Movi__628FA481">
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="0..1" />
+          <End Role="Salidas" Type="Self.Salidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimientos">
+              <PropertyRef Name="ID_Movimiento" />
+            </Principal>
+            <Dependent Role="Salidas">
+              <PropertyRef Name="ID_Movimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Personal__ID_Sed__5FB337D6">
+          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salidas__ID_Pers__656C112C">
+          <End Role="Personal" Type="Self.Personal" Multiplicity="0..1" />
+          <End Role="Salidas" Type="Self.Salidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal">
+              <PropertyRef Name="ID_Personal" />
+            </Principal>
+            <Dependent Role="Salidas">
+              <PropertyRef Name="ID_Personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__ID_Rol__3B75D760">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID_Roles" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="ID_Roles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salidas__ID_Sede__66603565">
+          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
+          <End Role="Salidas" Type="Self.Salidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Salidas">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salidas__ID_Unid__6477ECF3">
+          <End Role="Unidades" Type="Self.Unidades" Multiplicity="0..1" />
+          <End Role="Salidas" Type="Self.Salidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unidades">
+              <PropertyRef Name="ID_Unidad" />
+            </Principal>
+            <Dependent Role="Salidas">
+              <PropertyRef Name="ID_Unidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Unidades__ID_Sed__5CD6CB2B">
+          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
+          <End Role="Unidades" Type="Self.Unidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Unidades">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__ID_Sed__3C69FB99">
+          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Sistema_de_Almacen_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articulo" EntityType="Self.Articulo" />
+          <EntitySet Name="Centro_Costo" EntityType="Self.Centro_Costo" />
+          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
+          <EntitySet Name="Detalle_Entrada" EntityType="Self.Detalle_Entrada" />
+          <EntitySet Name="Detalle_Salida" EntityType="Self.Detalle_Salida" />
+          <EntitySet Name="Entradas" EntityType="Self.Entradas" />
+          <EntitySet Name="Inventario" EntityType="Self.Inventario" />
+          <EntitySet Name="Linea" EntityType="Self.Linea" />
+          <EntitySet Name="Movimientos" EntityType="Self.Movimientos" />
+          <EntitySet Name="Personal" EntityType="Self.Personal" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Salidas" EntityType="Self.Salidas" />
+          <EntitySet Name="Sedes" EntityType="Self.Sedes" />
+          <EntitySet Name="Unidades" EntityType="Self.Unidades" />
+          <EntitySet Name="Unidades_Medida" EntityType="Self.Unidades_Medida" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK__Articulo__ID_Lin__45F365D3" Association="Self.FK__Articulo__ID_Lin__45F365D3">
+            <End Role="Linea" EntitySet="Linea" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Articulo__ID_Med__46E78A0C" Association="Self.FK__Articulo__ID_Med__46E78A0C">
+            <End Role="Unidades_Medida" EntitySet="Unidades_Medida" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_E__ID_Ar__5812160E" Association="Self.FK__Detalle_E__ID_Ar__5812160E">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Detalle_Entrada" EntitySet="Detalle_Entrada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_S__ID_Ar__6A30C649" Association="Self.FK__Detalle_S__ID_Ar__6A30C649">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Detalle_Salida" EntitySet="Detalle_Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventari__ID_Ar__4AB81AF0" Association="Self.FK__Inventari__ID_Ar__4AB81AF0">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salidas__ID_CenC__6383C8BA" Association="Self.FK__Salidas__ID_CenC__6383C8BA">
+            <End Role="Centro_Costo" EntitySet="Centro_Costo" />
+            <End Role="Salidas" EntitySet="Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Linea__ID_Cuenta__412EB0B6" Association="Self.FK__Linea__ID_Cuenta__412EB0B6">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Linea" EntitySet="Linea" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_E__ID_En__571DF1D5" Association="Self.FK__Detalle_E__ID_En__571DF1D5">
+            <End Role="Entradas" EntitySet="Entradas" />
+            <End Role="Detalle_Entrada" EntitySet="Detalle_Entrada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_S__ID_Sa__693CA210" Association="Self.FK__Detalle_S__ID_Sa__693CA210">
+            <End Role="Salidas" EntitySet="Salidas" />
+            <End Role="Detalle_Salida" EntitySet="Detalle_Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Entradas__ID_Mov__52593CB8" Association="Self.FK__Entradas__ID_Mov__52593CB8">
+            <End Role="Movimientos" EntitySet="Movimientos" />
+            <End Role="Entradas" EntitySet="Entradas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Entradas__ID_Pro__534D60F1" Association="Self.FK__Entradas__ID_Pro__534D60F1">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Entradas" EntitySet="Entradas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Entradas__ID_Sed__5441852A" Association="Self.FK__Entradas__ID_Sed__5441852A">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Entradas" EntitySet="Entradas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventari__ID_Se__49C3F6B7" Association="Self.FK__Inventari__ID_Se__49C3F6B7">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salidas__ID_Movi__628FA481" Association="Self.FK__Salidas__ID_Movi__628FA481">
+            <End Role="Movimientos" EntitySet="Movimientos" />
+            <End Role="Salidas" EntitySet="Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Personal__ID_Sed__5FB337D6" Association="Self.FK__Personal__ID_Sed__5FB337D6">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salidas__ID_Pers__656C112C" Association="Self.FK__Salidas__ID_Pers__656C112C">
+            <End Role="Personal" EntitySet="Personal" />
+            <End Role="Salidas" EntitySet="Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__ID_Rol__3B75D760" Association="Self.FK__Usuarios__ID_Rol__3B75D760">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salidas__ID_Sede__66603565" Association="Self.FK__Salidas__ID_Sede__66603565">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Salidas" EntitySet="Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salidas__ID_Unid__6477ECF3" Association="Self.FK__Salidas__ID_Unid__6477ECF3">
+            <End Role="Unidades" EntitySet="Unidades" />
+            <End Role="Salidas" EntitySet="Salidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Unidades__ID_Sed__5CD6CB2B" Association="Self.FK__Unidades__ID_Sed__5CD6CB2B">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Unidades" EntitySet="Unidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__ID_Sed__3C69FB99" Association="Self.FK__Usuarios__ID_Sed__3C69FB99">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Sistema_de_AlmacenModelStoreContainer" CdmEntityContainer="Sistema_de_Almacen_Entities">
+          <EntitySetMapping Name="Articulo">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Articulo">
+              <MappingFragment StoreEntitySet="Articulo">
+                <ScalarProperty Name="ID_Articulo" ColumnName="ID_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Numero_Parte" ColumnName="Numero_Parte" />
+                <ScalarProperty Name="ID_Linea" ColumnName="ID_Linea" />
+                <ScalarProperty Name="ID_Medida" ColumnName="ID_Medida" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Centro_Costo">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Centro_Costo">
+              <MappingFragment StoreEntitySet="Centro_Costo">
+                <ScalarProperty Name="ID_CenCost" ColumnName="ID_CenCost" />
+                <ScalarProperty Name="Nombre_CenCost" ColumnName="Nombre_CenCost" />
+                <ScalarProperty Name="Descripcion_CenCost" ColumnName="Descripcion_CenCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuenta">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Cuenta">
+              <MappingFragment StoreEntitySet="Cuenta">
+                <ScalarProperty Name="ID_Cuenta" ColumnName="ID_Cuenta" />
+                <ScalarProperty Name="Nombre_Cuenta" ColumnName="Nombre_Cuenta" />
+                <ScalarProperty Name="Cuenta_Entrada" ColumnName="Cuenta_Entrada" />
+                <ScalarProperty Name="Cuenta_Salida" ColumnName="Cuenta_Salida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detalle_Entrada">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Detalle_Entrada">
+              <MappingFragment StoreEntitySet="Detalle_Entrada">
+                <ScalarProperty Name="ID_DetalleEntrada" ColumnName="ID_DetalleEntrada" />
+                <ScalarProperty Name="ID_Entradas" ColumnName="ID_Entradas" />
+                <ScalarProperty Name="ID_Articulo" ColumnName="ID_Articulo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio_Unitario" ColumnName="Precio_Unitario" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detalle_Salida">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Detalle_Salida">
+              <MappingFragment StoreEntitySet="Detalle_Salida">
+                <ScalarProperty Name="ID_DetalleSalida" ColumnName="ID_DetalleSalida" />
+                <ScalarProperty Name="ID_Salida" ColumnName="ID_Salida" />
+                <ScalarProperty Name="ID_Articulo" ColumnName="ID_Articulo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio_Unitario" ColumnName="Precio_Unitario" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entradas">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Entradas">
+              <MappingFragment StoreEntitySet="Entradas">
+                <ScalarProperty Name="ID_Entradas" ColumnName="ID_Entradas" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="ID_Movimiento" ColumnName="ID_Movimiento" />
+                <ScalarProperty Name="ID_Proveedores" ColumnName="ID_Proveedores" />
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="ID_Sede" ColumnName="ID_Sede" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventario">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Inventario">
+              <MappingFragment StoreEntitySet="Inventario">
+                <ScalarProperty Name="ID_Inventario" ColumnName="ID_Inventario" />
+                <ScalarProperty Name="ID_Sede" ColumnName="ID_Sede" />
+                <ScalarProperty Name="ID_Articulo" ColumnName="ID_Articulo" />
+                <ScalarProperty Name="Stock_Actual" ColumnName="Stock_Actual" />
+                <ScalarProperty Name="Stock_Minimo" ColumnName="Stock_Minimo" />
+                <ScalarProperty Name="Stock_Maximo" ColumnName="Stock_Maximo" />
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Costo_Promedio" ColumnName="Costo_Promedio" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="Ultimo_Costo" ColumnName="Ultimo_Costo" />
+                <ScalarProperty Name="Ultima_Compra" ColumnName="Ultima_Compra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Linea">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Linea">
+              <MappingFragment StoreEntitySet="Linea">
+                <ScalarProperty Name="ID_Linea" ColumnName="ID_Linea" />
+                <ScalarProperty Name="Nombre_Linea" ColumnName="Nombre_Linea" />
+                <ScalarProperty Name="Descripcion_Linea" ColumnName="Descripcion_Linea" />
+                <ScalarProperty Name="ID_Cuenta" ColumnName="ID_Cuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimientos">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Movimientos">
+              <MappingFragment StoreEntitySet="Movimientos">
+                <ScalarProperty Name="ID_Movimiento" ColumnName="ID_Movimiento" />
+                <ScalarProperty Name="Nombre_Movimiento" ColumnName="Nombre_Movimiento" />
+                <ScalarProperty Name="Descripcion_Movimiento" ColumnName="Descripcion_Movimiento" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personal">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Personal">
+              <MappingFragment StoreEntitySet="Personal">
+                <ScalarProperty Name="ID_Personal" ColumnName="ID_Personal" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="ID_Sede" ColumnName="ID_Sede" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Proveedores">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="ID_Proveedores" ColumnName="ID_Proveedores" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Razon_Social" ColumnName="Razon_Social" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ID_Roles" ColumnName="ID_Roles" />
+                <ScalarProperty Name="Nombre_Rol" ColumnName="Nombre_Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salidas">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Salidas">
+              <MappingFragment StoreEntitySet="Salidas">
+                <ScalarProperty Name="ID_Salida" ColumnName="ID_Salida" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="ID_Movimiento" ColumnName="ID_Movimiento" />
+                <ScalarProperty Name="ID_CenCost" ColumnName="ID_CenCost" />
+                <ScalarProperty Name="ID_Unidad" ColumnName="ID_Unidad" />
+                <ScalarProperty Name="ID_Personal" ColumnName="ID_Personal" />
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="ID_Sede" ColumnName="ID_Sede" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sedes">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Sedes">
+              <MappingFragment StoreEntitySet="Sedes">
+                <ScalarProperty Name="ID_Sede" ColumnName="ID_Sede" />
+                <ScalarProperty Name="Nombre_Sede" ColumnName="Nombre_Sede" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Unidades">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Unidades">
+              <MappingFragment StoreEntitySet="Unidades">
+                <ScalarProperty Name="ID_Unidad" ColumnName="ID_Unidad" />
+                <ScalarProperty Name="Numero_Placa" ColumnName="Numero_Placa" />
+                <ScalarProperty Name="Descripcion_Unidad" ColumnName="Descripcion_Unidad" />
+                <ScalarProperty Name="ID_Sede" ColumnName="ID_Sede" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Unidades_Medida">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Unidades_Medida">
+              <MappingFragment StoreEntitySet="Unidades_Medida">
+                <ScalarProperty Name="ID_Medida" ColumnName="ID_Medida" />
+                <ScalarProperty Name="Nombre_Unidad" ColumnName="Nombre_Unidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="Contrasenia" ColumnName="Contrasenia" />
+                <ScalarProperty Name="ID_Roles" ColumnName="ID_Roles" />
+                <ScalarProperty Name="ID_Sede" ColumnName="ID_Sede" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

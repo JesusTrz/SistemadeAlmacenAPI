@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Sistema_de_AlmacenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Sistema_de_AlmacenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Articulo">
           <Key>
             <PropertyRef Name="ID_Articulo" />
@@ -15,7 +15,6 @@
           <Property Name="Numero_Parte" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="ID_Linea" Type="int" />
           <Property Name="ID_Medida" Type="int" />
-          <Property Name="Unidad" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Centro_Costo">
           <Key>
@@ -531,28 +530,10 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Sistema_de_AlmacenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Articulo">
-          <Key>
-            <PropertyRef Name="ID_Articulo" />
-          </Key>
-          <Property Name="ID_Articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre_Articulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Descripcion_Articulo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Numero_Parte" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ID_Linea" Type="Int32" />
-          <Property Name="ID_Medida" Type="Int32" />
-          <Property Name="Unidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Linea" Relationship="Self.FK__Articulo__ID_Lin__45F365D3" FromRole="Articulo" ToRole="Linea" />
-          <NavigationProperty Name="Unidades_Medida" Relationship="Self.FK__Articulo__ID_Med__46E78A0C" FromRole="Articulo" ToRole="Unidades_Medida" />
-          <NavigationProperty Name="Detalle_Entrada" Relationship="Self.FK__Detalle_E__ID_Ar__5812160E" FromRole="Articulo" ToRole="Detalle_Entrada" />
-          <NavigationProperty Name="Detalle_Salida" Relationship="Self.FK__Detalle_S__ID_Ar__6A30C649" FromRole="Articulo" ToRole="Detalle_Salida" />
-          <NavigationProperty Name="Inventario" Relationship="Self.FK__Inventari__ID_Ar__4AB81AF0" FromRole="Articulo" ToRole="Inventario" />
-        </EntityType>
         <EntityType Name="Centro_Costo">
           <Key>
             <PropertyRef Name="ID_CenCost" />
@@ -582,8 +563,8 @@
           <Property Name="Cantidad" Type="Int32" />
           <Property Name="Precio_Unitario" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
-          <NavigationProperty Name="Articulo" Relationship="Self.FK__Detalle_E__ID_Ar__5812160E" FromRole="Detalle_Entrada" ToRole="Articulo" />
           <NavigationProperty Name="Entradas" Relationship="Self.FK__Detalle_E__ID_En__571DF1D5" FromRole="Detalle_Entrada" ToRole="Entradas" />
+          <NavigationProperty Name="Articulo" Relationship="Sistema_de_AlmacenModel.FK__Detalle_E__ID_Ar__5812160E" FromRole="Detalle_Entrada" ToRole="Articulo" />
         </EntityType>
         <EntityType Name="Detalle_Salida">
           <Key>
@@ -595,8 +576,8 @@
           <Property Name="Cantidad" Type="Int32" />
           <Property Name="Precio_Unitario" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
-          <NavigationProperty Name="Articulo" Relationship="Self.FK__Detalle_S__ID_Ar__6A30C649" FromRole="Detalle_Salida" ToRole="Articulo" />
           <NavigationProperty Name="Salidas" Relationship="Self.FK__Detalle_S__ID_Sa__693CA210" FromRole="Detalle_Salida" ToRole="Salidas" />
+          <NavigationProperty Name="Articulo" Relationship="Sistema_de_AlmacenModel.FK__Detalle_S__ID_Ar__6A30C649" FromRole="Detalle_Salida" ToRole="Articulo" />
         </EntityType>
         <EntityType Name="Entradas">
           <Key>
@@ -629,8 +610,8 @@
           <Property Name="Saldo" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Ultimo_Costo" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Ultima_Compra" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Articulo" Relationship="Self.FK__Inventari__ID_Ar__4AB81AF0" FromRole="Inventario" ToRole="Articulo" />
           <NavigationProperty Name="Sedes" Relationship="Self.FK__Inventari__ID_Se__49C3F6B7" FromRole="Inventario" ToRole="Sedes" />
+          <NavigationProperty Name="Articulo" Relationship="Sistema_de_AlmacenModel.FK__Inventari__ID_Ar__4AB81AF0" FromRole="Inventario" ToRole="Articulo" />
         </EntityType>
         <EntityType Name="Linea">
           <Key>
@@ -640,8 +621,8 @@
           <Property Name="Nombre_Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Descripcion_Linea" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ID_Cuenta" Type="Int32" />
-          <NavigationProperty Name="Articulo" Relationship="Self.FK__Articulo__ID_Lin__45F365D3" FromRole="Linea" ToRole="Articulo" />
           <NavigationProperty Name="Cuenta" Relationship="Self.FK__Linea__ID_Cuenta__412EB0B6" FromRole="Linea" ToRole="Cuenta" />
+          <NavigationProperty Name="Articulo" Relationship="Sistema_de_AlmacenModel.FK__Articulo__ID_Lin__45F365D3" FromRole="Linea" ToRole="Articulo" />
         </EntityType>
         <EntityType Name="Movimientos">
           <Key>
@@ -735,7 +716,7 @@
           </Key>
           <Property Name="ID_Medida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre_Unidad" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Articulo" Relationship="Self.FK__Articulo__ID_Med__46E78A0C" FromRole="Unidades_Medida" ToRole="Articulo" />
+          <NavigationProperty Name="Articulo" Relationship="Sistema_de_AlmacenModel.FK__Articulo__ID_Med__46E78A0C" FromRole="Unidades_Medida" ToRole="Articulo" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -749,66 +730,6 @@
           <NavigationProperty Name="Roles" Relationship="Self.FK__Usuarios__ID_Rol__3B75D760" FromRole="Usuarios" ToRole="Roles" />
           <NavigationProperty Name="Sedes" Relationship="Self.FK__Usuarios__ID_Sed__3C69FB99" FromRole="Usuarios" ToRole="Sedes" />
         </EntityType>
-        <Association Name="FK__Articulo__ID_Lin__45F365D3">
-          <End Role="Linea" Type="Self.Linea" Multiplicity="0..1" />
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Linea">
-              <PropertyRef Name="ID_Linea" />
-            </Principal>
-            <Dependent Role="Articulo">
-              <PropertyRef Name="ID_Linea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Articulo__ID_Med__46E78A0C">
-          <End Role="Unidades_Medida" Type="Self.Unidades_Medida" Multiplicity="0..1" />
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Unidades_Medida">
-              <PropertyRef Name="ID_Medida" />
-            </Principal>
-            <Dependent Role="Articulo">
-              <PropertyRef Name="ID_Medida" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Detalle_E__ID_Ar__5812160E">
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
-          <End Role="Detalle_Entrada" Type="Self.Detalle_Entrada" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Articulo">
-              <PropertyRef Name="ID_Articulo" />
-            </Principal>
-            <Dependent Role="Detalle_Entrada">
-              <PropertyRef Name="ID_Articulo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Detalle_S__ID_Ar__6A30C649">
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
-          <End Role="Detalle_Salida" Type="Self.Detalle_Salida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Articulo">
-              <PropertyRef Name="ID_Articulo" />
-            </Principal>
-            <Dependent Role="Detalle_Salida">
-              <PropertyRef Name="ID_Articulo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Inventari__ID_Ar__4AB81AF0">
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
-          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Articulo">
-              <PropertyRef Name="ID_Articulo" />
-            </Principal>
-            <Dependent Role="Inventario">
-              <PropertyRef Name="ID_Articulo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Salidas__ID_CenC__6383C8BA">
           <End Role="Centro_Costo" Type="Self.Centro_Costo" Multiplicity="0..1" />
           <End Role="Salidas" Type="Self.Salidas" Multiplicity="*" />
@@ -1002,7 +923,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Sistema_de_Almacen_Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Articulo" EntityType="Self.Articulo" />
           <EntitySet Name="Centro_Costo" EntityType="Self.Centro_Costo" />
           <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
           <EntitySet Name="Detalle_Entrada" EntityType="Self.Detalle_Entrada" />
@@ -1019,26 +939,6 @@
           <EntitySet Name="Unidades" EntityType="Self.Unidades" />
           <EntitySet Name="Unidades_Medida" EntityType="Self.Unidades_Medida" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
-          <AssociationSet Name="FK__Articulo__ID_Lin__45F365D3" Association="Self.FK__Articulo__ID_Lin__45F365D3">
-            <End Role="Linea" EntitySet="Linea" />
-            <End Role="Articulo" EntitySet="Articulo" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Articulo__ID_Med__46E78A0C" Association="Self.FK__Articulo__ID_Med__46E78A0C">
-            <End Role="Unidades_Medida" EntitySet="Unidades_Medida" />
-            <End Role="Articulo" EntitySet="Articulo" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Detalle_E__ID_Ar__5812160E" Association="Self.FK__Detalle_E__ID_Ar__5812160E">
-            <End Role="Articulo" EntitySet="Articulo" />
-            <End Role="Detalle_Entrada" EntitySet="Detalle_Entrada" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Detalle_S__ID_Ar__6A30C649" Association="Self.FK__Detalle_S__ID_Ar__6A30C649">
-            <End Role="Articulo" EntitySet="Articulo" />
-            <End Role="Detalle_Salida" EntitySet="Detalle_Salida" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Inventari__ID_Ar__4AB81AF0" Association="Self.FK__Inventari__ID_Ar__4AB81AF0">
-            <End Role="Articulo" EntitySet="Articulo" />
-            <End Role="Inventario" EntitySet="Inventario" />
-          </AssociationSet>
           <AssociationSet Name="FK__Salidas__ID_CenC__6383C8BA" Association="Self.FK__Salidas__ID_CenC__6383C8BA">
             <End Role="Centro_Costo" EntitySet="Centro_Costo" />
             <End Role="Salidas" EntitySet="Salidas" />
@@ -1103,26 +1003,110 @@
             <End Role="Sedes" EntitySet="Sedes" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
+          <EntitySet Name="Articulo" EntityType="Sistema_de_AlmacenModel.Articulo" />
+          <AssociationSet Name="FK__Articulo__ID_Lin__45F365D3" Association="Sistema_de_AlmacenModel.FK__Articulo__ID_Lin__45F365D3">
+            <End Role="Linea" EntitySet="Linea" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Articulo__ID_Med__46E78A0C" Association="Sistema_de_AlmacenModel.FK__Articulo__ID_Med__46E78A0C">
+            <End Role="Unidades_Medida" EntitySet="Unidades_Medida" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_E__ID_Ar__5812160E" Association="Sistema_de_AlmacenModel.FK__Detalle_E__ID_Ar__5812160E">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Detalle_Entrada" EntitySet="Detalle_Entrada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_S__ID_Ar__6A30C649" Association="Sistema_de_AlmacenModel.FK__Detalle_S__ID_Ar__6A30C649">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Detalle_Salida" EntitySet="Detalle_Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventari__ID_Ar__4AB81AF0" Association="Sistema_de_AlmacenModel.FK__Inventari__ID_Ar__4AB81AF0">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="ID_Articulo" />
+          </Key>
+          <Property Name="ID_Articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Articulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion_Articulo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Numero_Parte" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Linea" Type="Int32" />
+          <Property Name="ID_Medida" Type="Int32" />
+          <NavigationProperty Name="Linea" Relationship="Sistema_de_AlmacenModel.FK__Articulo__ID_Lin__45F365D3" FromRole="Articulo" ToRole="Linea" />
+          <NavigationProperty Name="Unidades_Medida" Relationship="Sistema_de_AlmacenModel.FK__Articulo__ID_Med__46E78A0C" FromRole="Articulo" ToRole="Unidades_Medida" />
+          <NavigationProperty Name="Detalle_Entrada" Relationship="Sistema_de_AlmacenModel.FK__Detalle_E__ID_Ar__5812160E" FromRole="Articulo" ToRole="Detalle_Entrada" />
+          <NavigationProperty Name="Detalle_Salida" Relationship="Sistema_de_AlmacenModel.FK__Detalle_S__ID_Ar__6A30C649" FromRole="Articulo" ToRole="Detalle_Salida" />
+          <NavigationProperty Name="Inventario" Relationship="Sistema_de_AlmacenModel.FK__Inventari__ID_Ar__4AB81AF0" FromRole="Articulo" ToRole="Inventario" />
+        </EntityType>
+        <Association Name="FK__Articulo__ID_Lin__45F365D3">
+          <End Type="Sistema_de_AlmacenModel.Linea" Role="Linea" Multiplicity="0..1" />
+          <End Type="Sistema_de_AlmacenModel.Articulo" Role="Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="ID_Linea" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="ID_Linea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Articulo__ID_Med__46E78A0C">
+          <End Type="Sistema_de_AlmacenModel.Unidades_Medida" Role="Unidades_Medida" Multiplicity="0..1" />
+          <End Type="Sistema_de_AlmacenModel.Articulo" Role="Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unidades_Medida">
+              <PropertyRef Name="ID_Medida" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="ID_Medida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_E__ID_Ar__5812160E">
+          <End Type="Sistema_de_AlmacenModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="Sistema_de_AlmacenModel.Detalle_Entrada" Role="Detalle_Entrada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="ID_Articulo" />
+            </Principal>
+            <Dependent Role="Detalle_Entrada">
+              <PropertyRef Name="ID_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_S__ID_Ar__6A30C649">
+          <End Type="Sistema_de_AlmacenModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="Sistema_de_AlmacenModel.Detalle_Salida" Role="Detalle_Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="ID_Articulo" />
+            </Principal>
+            <Dependent Role="Detalle_Salida">
+              <PropertyRef Name="ID_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventari__ID_Ar__4AB81AF0">
+          <End Type="Sistema_de_AlmacenModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="Sistema_de_AlmacenModel.Inventario" Role="Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="ID_Articulo" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="ID_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Sistema_de_AlmacenModelStoreContainer" CdmEntityContainer="Sistema_de_Almacen_Entities">
-          <EntitySetMapping Name="Articulo">
-            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Articulo">
-              <MappingFragment StoreEntitySet="Articulo">
-                <ScalarProperty Name="ID_Articulo" ColumnName="ID_Articulo" />
-                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
-                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
-                <ScalarProperty Name="Numero_Parte" ColumnName="Numero_Parte" />
-                <ScalarProperty Name="ID_Linea" ColumnName="ID_Linea" />
-                <ScalarProperty Name="ID_Medida" ColumnName="ID_Medida" />
-                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Centro_Costo">
             <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Centro_Costo">
               <MappingFragment StoreEntitySet="Centro_Costo">
@@ -1295,6 +1279,18 @@
                 <ScalarProperty Name="Contrasenia" ColumnName="Contrasenia" />
                 <ScalarProperty Name="ID_Roles" ColumnName="ID_Roles" />
                 <ScalarProperty Name="ID_Sede" ColumnName="ID_Sede" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articulo">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Articulo">
+              <MappingFragment StoreEntitySet="Articulo">
+                <ScalarProperty Name="ID_Medida" ColumnName="ID_Medida" />
+                <ScalarProperty Name="ID_Linea" ColumnName="ID_Linea" />
+                <ScalarProperty Name="Numero_Parte" ColumnName="Numero_Parte" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="ID_Articulo" ColumnName="ID_Articulo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -108,7 +108,7 @@ namespace SistemadeAlmacenAPI.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al Actualizar lpos Datos del Personal" + ex.Message);
+                throw new Exception("Error al Actualizar los Datos del Personal" + ex.Message);
             }
         }
         #endregion

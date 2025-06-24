@@ -25,7 +25,6 @@ namespace SistemadeAlmacenAPI.Database
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Articulo> Articulo { get; set; }
         public virtual DbSet<Centro_Costo> Centro_Costo { get; set; }
         public virtual DbSet<Cuenta> Cuenta { get; set; }
         public virtual DbSet<Detalle_Entrada> Detalle_Entrada { get; set; }
@@ -42,5 +41,6 @@ namespace SistemadeAlmacenAPI.Database
         public virtual DbSet<Unidades> Unidades { get; set; }
         public virtual DbSet<Unidades_Medida> Unidades_Medida { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
+        public virtual DbSet<Articulo> Articulo { get; set; }
     }
 }

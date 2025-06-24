@@ -19,6 +19,5 @@ namespace SistemadeAlmacenAPI.Models
         public string Nombre_Linea { get; set; }
         public string Descripcion_Linea { get; set; }
         public Nullable<int> ID_Cuenta { get; set; }
-        public string Nombre_Cuenta { get; set; }
     }
 }

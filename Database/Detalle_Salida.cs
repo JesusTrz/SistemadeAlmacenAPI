@@ -21,7 +21,7 @@ namespace SistemadeAlmacenAPI.Database
         public Nullable<decimal> Precio_Unitario { get; set; }
         public Nullable<decimal> Total { get; set; }
     
-        public virtual Articulo Articulo { get; set; }
         public virtual Salidas Salidas { get; set; }
+        public virtual Articulo Articulo { get; set; }
     }
 }

@@ -25,8 +25,8 @@ namespace SistemadeAlmacenAPI.Database
         public string Descripcion_Linea { get; set; }
         public Nullable<int> ID_Cuenta { get; set; }
     
+        public virtual Cuenta Cuenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Articulo> Articulo { get; set; }
-        public virtual Cuenta Cuenta { get; set; }
     }
 }

@@ -28,7 +28,6 @@ namespace SistemadeAlmacenAPI.Database
         public string Numero_Parte { get; set; }
         public Nullable<int> ID_Linea { get; set; }
         public Nullable<int> ID_Medida { get; set; }
-        public string Unidad { get; set; }
     
         public virtual Linea Linea { get; set; }
         public virtual Unidades_Medida Unidades_Medida { get; set; }

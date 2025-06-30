@@ -17,9 +17,9 @@ namespace SistemadeAlmacenAPI.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Articulo()
         {
+            this.Inventario = new HashSet<Inventario>();
             this.Detalle_Entrada = new HashSet<Detalle_Entrada>();
             this.Detalle_Salida = new HashSet<Detalle_Salida>();
-            this.Inventario = new HashSet<Inventario>();
         }
     
         public int ID_Articulo { get; set; }
@@ -32,10 +32,10 @@ namespace SistemadeAlmacenAPI.Database
         public virtual Linea Linea { get; set; }
         public virtual Unidades_Medida Unidades_Medida { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inventario> Inventario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalle_Entrada> Detalle_Entrada { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalle_Salida> Detalle_Salida { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inventario> Inventario { get; set; }
     }
 }

@@ -12,7 +12,9 @@ namespace SistemadeAlmacenAPI.Models
         public string Descripcion_Articulo { get; set; }
         public string Numero_Parte { get; set; }
         public Nullable<int> ID_Linea { get; set; }
+        public string Nombre_Linea { get; set; }
         public Nullable<int> ID_Medida { get; set; }
+        public string Nombre_Unidad { get; set; }
     }
 
     public class ArticulosDatos

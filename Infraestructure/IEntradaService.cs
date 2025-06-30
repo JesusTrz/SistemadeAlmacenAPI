@@ -1,0 +1,14 @@
+﻿using SistemadeAlmacenAPI.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SistemadeAlmacenAPI.Infraestructure
+{
+    public interface IEntradaService
+    {
+        bool RegistrarEntradayDetalles(EntradasDto entradasdto);
+    }
+}

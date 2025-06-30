@@ -27,7 +27,9 @@ namespace SistemadeAlmacenAPI.Services
                 Descripcion_Articulo = articulo.Descripcion_Articulo,
                 Numero_Parte = articulo.Numero_Parte,
                 ID_Linea = articulo.ID_Linea,
-                ID_Medida = articulo.ID_Medida
+                Nombre_Linea = articulo.Linea.Nombre_Linea,
+                ID_Medida = articulo.ID_Medida,
+                Nombre_Unidad = articulo.Unidades_Medida.Nombre_Unidad
             }).ToList();
         }
 
@@ -43,7 +45,9 @@ namespace SistemadeAlmacenAPI.Services
                 Descripcion_Articulo = articulo.Descripcion_Articulo,
                 Numero_Parte = articulo.Numero_Parte,
                 ID_Linea = articulo.ID_Linea,
-                ID_Medida = articulo.ID_Medida
+                Nombre_Linea = articulo.Linea.Nombre_Linea,
+                ID_Medida = articulo.ID_Medida,
+                Nombre_Unidad = articulo.Unidades_Medida.Nombre_Unidad
             };
         }
         #endregion

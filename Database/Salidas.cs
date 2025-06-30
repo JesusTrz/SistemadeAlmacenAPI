@@ -31,11 +31,11 @@ namespace SistemadeAlmacenAPI.Database
         public Nullable<int> ID_Sede { get; set; }
     
         public virtual Centro_Costo Centro_Costo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Detalle_Salida> Detalle_Salida { get; set; }
         public virtual Movimientos Movimientos { get; set; }
         public virtual Personal Personal { get; set; }
         public virtual Sedes Sedes { get; set; }
         public virtual Unidades Unidades { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Detalle_Salida> Detalle_Salida { get; set; }
     }
 }

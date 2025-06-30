@@ -26,7 +26,7 @@ namespace SistemadeAlmacenAPI.Database
         public Nullable<decimal> Ultimo_Costo { get; set; }
         public Nullable<System.DateTime> Ultima_Compra { get; set; }
     
-        public virtual Sedes Sedes { get; set; }
         public virtual Articulo Articulo { get; set; }
+        public virtual Sedes Sedes { get; set; }
     }
 }

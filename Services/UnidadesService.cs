@@ -47,6 +47,20 @@ namespace SistemadeAlmacenAPI.Services
                 };
             }
         }
+
+        public List<UnidadesDto> GetUnidadesByIdSede(int idSede)
+        {
+            var result = _context.Unidades
+                .Where(i=>i.ID_Sede == idSede)
+                .Select(i=> new UnidadesDto
+                {
+                    ID_Unidad = i.ID_Unidad,
+                    Numero_Placa= i.Numero_Placa,
+                    Descripcion_Unidad = i.Descripcion_Unidad,
+                    ID_Sede = i.ID_Sede
+                }).ToList();
+            return result;
+        }
         #endregion
 
         #region Agregar Unidad

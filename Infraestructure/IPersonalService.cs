@@ -13,6 +13,8 @@ namespace SistemadeAlmacenAPI.Infraestructure
         bool DeletePersonal(int id);
         List<PersonalDto> GetAllPersonal();
         PersonalDto GetPersonalById(int id);
+        List<PersonalDto> GetPersonalByIdSede(int idSede);
+        List<PersonalDto> GetPersonalByLetra(int idSede, string letra);
         bool UpdatePersonal(int id, PersonalDatos personalDatos);
     }
 }

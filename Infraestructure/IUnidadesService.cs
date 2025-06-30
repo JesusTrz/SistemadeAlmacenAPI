@@ -13,6 +13,7 @@ namespace SistemadeAlmacenAPI.Infraestructure
         bool DeletePersonal(int id);
         List<UnidadesDto> GetAllUnidades();
         UnidadesDto GetUnidadById(int id);
+        List<UnidadesDto> GetUnidadesByIdSede(int idSede);
         bool UpdateUnidad(int id, UnidadesDatos unidadDatos);
     }
 }

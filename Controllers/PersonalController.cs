@@ -45,6 +45,26 @@ namespace SistemadeAlmacenAPI.Controllers
                 return BadRequest("La Persona no fue Encontrada");
             }
         }
+
+        [HttpGet]
+        [Route("GetPersonalByIdSede")]
+
+        public IHttpActionResult GetPersonalByIdSede(int idSede)
+        {
+            var result = _personalService.GetPersonalByIdSede(idSede);
+            if (result != null) return Ok(result);
+            else return BadRequest("No Encontrado");
+        }
+
+        [HttpGet]
+        [Route("GetPersonalByLetra")]
+
+        public IHttpActionResult GetPersonalByLetra(int idSede, string letra)
+        {
+            var result = _personalService.GetPersonalByLetra(idSede, letra);
+            if (result != null) return Ok(result);
+            else return BadRequest("Persona no Existente");
+        }
         #endregion
 
         #region Agregar nuevo Personal

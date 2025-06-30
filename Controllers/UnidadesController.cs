@@ -44,6 +44,16 @@ namespace SistemadeAlmacenAPI.Controllers
                 return BadRequest("La Unidad no fue Encontrada");
             }
         }
+
+        [HttpGet]
+        [Route("GetUnidadesByIdSede")]
+
+        public IHttpActionResult GetUnidadesByIdSede(int idSede)
+        {
+            var result = _unidadesService.GetUnidadesByIdSede(idSede);
+            if (result != null) return Ok(result);
+            else return BadRequest("Unidad no Encontrada");
+        }
         #endregion
 
         #region Agregar nuevo Personal

@@ -47,6 +47,38 @@ namespace SistemadeAlmacenAPI.Services
                 };
             }
         }
+
+        public List<PersonalDto> GetPersonalByIdSede(int idSede)
+        {
+            var result = _context.Personal
+                .Where(i => i.ID_Sede == idSede)
+                .Select(i => new PersonalDto
+                {
+                    ID_Personal = i.ID_Personal,
+                    Nombre = i.Nombre,
+                    Apellidos = i.Apellidos,
+                    ID_Sede = i.ID_Sede
+                }).ToList();
+            return result;
+        }
+
+        public List<PersonalDto> GetPersonalByLetra(int idSede, string letra)
+        {
+            if (string.IsNullOrWhiteSpace(letra))
+                return new List<PersonalDto>();
+            letra = letra.ToLower();
+            var result = _context.Personal
+                .Where(i => i.ID_Sede == idSede && i.Nombre.ToLower().StartsWith(letra))
+                .OrderBy(i=>i.Nombre)
+                .Select(i => new PersonalDto
+                {
+                    ID_Personal = i.ID_Personal,
+                    Nombre = i.Nombre,
+                    Apellidos = i.Apellidos,
+                    ID_Sede = i.ID_Sede
+                }).ToList();
+            return result;
+        }
         #endregion
 
         #region Agregar Personal

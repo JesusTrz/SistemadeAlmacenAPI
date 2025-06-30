@@ -284,7 +284,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Inventari__ID_Ar__4AB81AF0">
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Articulo">
@@ -595,24 +597,6 @@
           <NavigationProperty Name="Proveedores" Relationship="Self.FK__Entradas__ID_Pro__534D60F1" FromRole="Entradas" ToRole="Proveedores" />
           <NavigationProperty Name="Sedes" Relationship="Self.FK__Entradas__ID_Sed__5441852A" FromRole="Entradas" ToRole="Sedes" />
         </EntityType>
-        <EntityType Name="Inventario">
-          <Key>
-            <PropertyRef Name="ID_Inventario" />
-          </Key>
-          <Property Name="ID_Inventario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_Sede" Type="Int32" />
-          <Property Name="ID_Articulo" Type="Int32" />
-          <Property Name="Stock_Actual" Type="Int32" />
-          <Property Name="Stock_Minimo" Type="Int32" />
-          <Property Name="Stock_Maximo" Type="Int32" />
-          <Property Name="Ubicacion" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="Costo_Promedio" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Saldo" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Ultimo_Costo" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Ultima_Compra" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Sedes" Relationship="Self.FK__Inventari__ID_Se__49C3F6B7" FromRole="Inventario" ToRole="Sedes" />
-          <NavigationProperty Name="Articulo" Relationship="Sistema_de_AlmacenModel.FK__Inventari__ID_Ar__4AB81AF0" FromRole="Inventario" ToRole="Articulo" />
-        </EntityType>
         <EntityType Name="Linea">
           <Key>
             <PropertyRef Name="ID_Linea" />
@@ -693,11 +677,11 @@
           <Property Name="ID_Sede" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre_Sede" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Entradas" Relationship="Self.FK__Entradas__ID_Sed__5441852A" FromRole="Sedes" ToRole="Entradas" />
-          <NavigationProperty Name="Inventario" Relationship="Self.FK__Inventari__ID_Se__49C3F6B7" FromRole="Sedes" ToRole="Inventario" />
           <NavigationProperty Name="Personal" Relationship="Self.FK__Personal__ID_Sed__5FB337D6" FromRole="Sedes" ToRole="Personal" />
           <NavigationProperty Name="Salidas" Relationship="Self.FK__Salidas__ID_Sede__66603565" FromRole="Sedes" ToRole="Salidas" />
           <NavigationProperty Name="Unidades" Relationship="Self.FK__Unidades__ID_Sed__5CD6CB2B" FromRole="Sedes" ToRole="Unidades" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__ID_Sed__3C69FB99" FromRole="Sedes" ToRole="Usuarios" />
+          <NavigationProperty Name="Inventario" Relationship="Sistema_de_AlmacenModel.FK__Inventari__ID_Se__49C3F6B7" FromRole="Sedes" ToRole="Inventario" />
         </EntityType>
         <EntityType Name="Unidades">
           <Key>
@@ -814,18 +798,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inventari__ID_Se__49C3F6B7">
-          <End Role="Sedes" Type="Self.Sedes" Multiplicity="0..1" />
-          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sedes">
-              <PropertyRef Name="ID_Sede" />
-            </Principal>
-            <Dependent Role="Inventario">
-              <PropertyRef Name="ID_Sede" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Salidas__ID_Movi__628FA481">
           <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="0..1" />
           <End Role="Salidas" Type="Self.Salidas" Multiplicity="*" />
@@ -928,7 +900,6 @@
           <EntitySet Name="Detalle_Entrada" EntityType="Self.Detalle_Entrada" />
           <EntitySet Name="Detalle_Salida" EntityType="Self.Detalle_Salida" />
           <EntitySet Name="Entradas" EntityType="Self.Entradas" />
-          <EntitySet Name="Inventario" EntityType="Self.Inventario" />
           <EntitySet Name="Linea" EntityType="Self.Linea" />
           <EntitySet Name="Movimientos" EntityType="Self.Movimientos" />
           <EntitySet Name="Personal" EntityType="Self.Personal" />
@@ -967,10 +938,6 @@
             <End Role="Sedes" EntitySet="Sedes" />
             <End Role="Entradas" EntitySet="Entradas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inventari__ID_Se__49C3F6B7" Association="Self.FK__Inventari__ID_Se__49C3F6B7">
-            <End Role="Sedes" EntitySet="Sedes" />
-            <End Role="Inventario" EntitySet="Inventario" />
-          </AssociationSet>
           <AssociationSet Name="FK__Salidas__ID_Movi__628FA481" Association="Self.FK__Salidas__ID_Movi__628FA481">
             <End Role="Movimientos" EntitySet="Movimientos" />
             <End Role="Salidas" EntitySet="Salidas" />
@@ -1004,6 +971,7 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
           <EntitySet Name="Articulo" EntityType="Sistema_de_AlmacenModel.Articulo" />
+          <EntitySet Name="Inventario" EntityType="Sistema_de_AlmacenModel.Inventario" />
           <AssociationSet Name="FK__Articulo__ID_Lin__45F365D3" Association="Sistema_de_AlmacenModel.FK__Articulo__ID_Lin__45F365D3">
             <End Role="Linea" EntitySet="Linea" />
             <End Role="Articulo" EntitySet="Articulo" />
@@ -1024,7 +992,11 @@
             <End Role="Articulo" EntitySet="Articulo" />
             <End Role="Inventario" EntitySet="Inventario" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK__Inventari__ID_Se__49C3F6B7" Association="Sistema_de_AlmacenModel.FK__Inventari__ID_Se__49C3F6B7">
+            <End Role="Sedes" EntitySet="Sedes" />
+            <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
             <PropertyRef Name="ID_Articulo" />
@@ -1040,6 +1012,24 @@
           <NavigationProperty Name="Detalle_Entrada" Relationship="Sistema_de_AlmacenModel.FK__Detalle_E__ID_Ar__5812160E" FromRole="Articulo" ToRole="Detalle_Entrada" />
           <NavigationProperty Name="Detalle_Salida" Relationship="Sistema_de_AlmacenModel.FK__Detalle_S__ID_Ar__6A30C649" FromRole="Articulo" ToRole="Detalle_Salida" />
           <NavigationProperty Name="Inventario" Relationship="Sistema_de_AlmacenModel.FK__Inventari__ID_Ar__4AB81AF0" FromRole="Articulo" ToRole="Inventario" />
+        </EntityType>
+        <EntityType Name="Inventario">
+          <Key>
+            <PropertyRef Name="ID_Inventario" />
+          </Key>
+          <Property Name="ID_Inventario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Sede" Type="Int32" />
+          <Property Name="ID_Articulo" Type="Int32" />
+          <Property Name="Stock_Actual" Type="Int32" />
+          <Property Name="Stock_Minimo" Type="Int32" />
+          <Property Name="Stock_Maximo" Type="Int32" />
+          <Property Name="Ubicacion" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Costo_Promedio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Saldo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Ultimo_Costo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Ultima_Compra" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Articulo" Relationship="Sistema_de_AlmacenModel.FK__Inventari__ID_Ar__4AB81AF0" FromRole="Inventario" ToRole="Articulo" />
+          <NavigationProperty Name="Sedes" Relationship="Sistema_de_AlmacenModel.FK__Inventari__ID_Se__49C3F6B7" FromRole="Inventario" ToRole="Sedes" />
         </EntityType>
         <Association Name="FK__Articulo__ID_Lin__45F365D3">
           <End Type="Sistema_de_AlmacenModel.Linea" Role="Linea" Multiplicity="0..1" />
@@ -1090,7 +1080,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Inventari__ID_Ar__4AB81AF0">
-          <End Type="Sistema_de_AlmacenModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+          <End Type="Sistema_de_AlmacenModel.Articulo" Role="Articulo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Sistema_de_AlmacenModel.Inventario" Role="Inventario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Articulo">
@@ -1101,7 +1093,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK__Inventari__ID_Se__49C3F6B7">
+          <End Type="Sistema_de_AlmacenModel.Sedes" Role="Sedes" Multiplicity="0..1" />
+          <End Type="Sistema_de_AlmacenModel.Inventario" Role="Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sedes">
+              <PropertyRef Name="ID_Sede" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="ID_Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1160,23 +1164,6 @@
                 <ScalarProperty Name="ID_Proveedores" ColumnName="ID_Proveedores" />
                 <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
                 <ScalarProperty Name="ID_Sede" ColumnName="ID_Sede" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Inventario">
-            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Inventario">
-              <MappingFragment StoreEntitySet="Inventario">
-                <ScalarProperty Name="ID_Inventario" ColumnName="ID_Inventario" />
-                <ScalarProperty Name="ID_Sede" ColumnName="ID_Sede" />
-                <ScalarProperty Name="ID_Articulo" ColumnName="ID_Articulo" />
-                <ScalarProperty Name="Stock_Actual" ColumnName="Stock_Actual" />
-                <ScalarProperty Name="Stock_Minimo" ColumnName="Stock_Minimo" />
-                <ScalarProperty Name="Stock_Maximo" ColumnName="Stock_Maximo" />
-                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
-                <ScalarProperty Name="Costo_Promedio" ColumnName="Costo_Promedio" />
-                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-                <ScalarProperty Name="Ultimo_Costo" ColumnName="Ultimo_Costo" />
-                <ScalarProperty Name="Ultima_Compra" ColumnName="Ultima_Compra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1291,6 +1278,23 @@
                 <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
                 <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
                 <ScalarProperty Name="ID_Articulo" ColumnName="ID_Articulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventario">
+            <EntityTypeMapping TypeName="Sistema_de_AlmacenModel.Inventario">
+              <MappingFragment StoreEntitySet="Inventario">
+                <ScalarProperty Name="Ultima_Compra" ColumnName="Ultima_Compra" />
+                <ScalarProperty Name="Ultimo_Costo" ColumnName="Ultimo_Costo" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="Costo_Promedio" ColumnName="Costo_Promedio" />
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Stock_Maximo" ColumnName="Stock_Maximo" />
+                <ScalarProperty Name="Stock_Minimo" ColumnName="Stock_Minimo" />
+                <ScalarProperty Name="Stock_Actual" ColumnName="Stock_Actual" />
+                <ScalarProperty Name="ID_Articulo" ColumnName="ID_Articulo" />
+                <ScalarProperty Name="ID_Sede" ColumnName="ID_Sede" />
+                <ScalarProperty Name="ID_Inventario" ColumnName="ID_Inventario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

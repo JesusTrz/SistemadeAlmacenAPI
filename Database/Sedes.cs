@@ -18,11 +18,11 @@ namespace SistemadeAlmacenAPI.Database
         public Sedes()
         {
             this.Entradas = new HashSet<Entradas>();
-            this.Inventario = new HashSet<Inventario>();
             this.Personal = new HashSet<Personal>();
             this.Salidas = new HashSet<Salidas>();
             this.Unidades = new HashSet<Unidades>();
             this.Usuarios = new HashSet<Usuarios>();
+            this.Inventario = new HashSet<Inventario>();
         }
     
         public int ID_Sede { get; set; }
@@ -31,8 +31,6 @@ namespace SistemadeAlmacenAPI.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Entradas> Entradas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inventario> Inventario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Personal> Personal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Salidas> Salidas { get; set; }
@@ -40,5 +38,7 @@ namespace SistemadeAlmacenAPI.Database
         public virtual ICollection<Unidades> Unidades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuarios> Usuarios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inventario> Inventario { get; set; }
     }
 }

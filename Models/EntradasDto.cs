@@ -20,4 +20,27 @@ namespace SistemadeAlmacenAPI.Models
         public Nullable<int> Cantidad { get; set; }
         public Nullable<decimal> Precio_Unitario { get; set; }
     }
+
+    public class GetEntradasDto
+    {
+        public int ID_Entradas { get; set; }
+        public DateTime? Fecha { get; set; }
+        public TimeSpan? Hora { get; set; }
+        public string Comentarios { get; set; }
+        public int? ID_Proveedores { get; set; }
+        public string Razon_Social { get; set; }
+        public int? ID_Movimiento { get; set; }
+        public string Nombre_Movimiento { get; set; }
+        public string Descripcion_Movimiento { get; set; }
+        public int? ID_Sede { get; set; }
+        public List<GetDetallesEntradasDto> Detalles { get; set; }
+    }
+
+    public class GetDetallesEntradasDto
+    {
+        public int? ID_Articulo { get; set; }
+        public int? Cantidad { get; set; }
+        public decimal? Precio_Unitario { get; set; }
+        public decimal? Total { get; set; }
+    }
 }

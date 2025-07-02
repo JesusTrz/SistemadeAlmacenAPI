@@ -181,6 +181,7 @@
     <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\SalidaController.cs" />
     <Compile Include="Controllers\SedesController.cs" />
     <Compile Include="Controllers\UnidadesController.cs" />
     <Compile Include="Controllers\UnidadesMedidaController.cs" />
@@ -265,6 +266,7 @@
     <Compile Include="Infraestructure\IPersonalService.cs" />
     <Compile Include="Infraestructure\IProveedoresService.cs" />
     <Compile Include="Infraestructure\IRolesService.cs" />
+    <Compile Include="Infraestructure\ISalidaService.cs" />
     <Compile Include="Infraestructure\ISedesService.cs" />
     <Compile Include="Infraestructure\IUnidadesMedidaService.cs" />
     <Compile Include="Infraestructure\IUnidadesService.cs" />
@@ -279,6 +281,7 @@
     <Compile Include="Models\PersonalDto.cs" />
     <Compile Include="Models\ProveedoresDto.cs" />
     <Compile Include="Models\RolesDto.cs" />
+    <Compile Include="Models\SalidaDto.cs" />
     <Compile Include="Models\SedesDto.cs" />
     <Compile Include="Models\UnidadesDto.cs" />
     <Compile Include="Models\UnidadesMedidaDto.cs" />
@@ -294,6 +297,7 @@
     <Compile Include="Services\PersonalService.cs" />
     <Compile Include="Services\ProveedoresService.cs" />
     <Compile Include="Services\RolesService.cs" />
+    <Compile Include="Services\SalidaService.cs" />
     <Compile Include="Services\SedesService.cs" />
     <Compile Include="Services\UnidadesMedidaService.cs" />
     <Compile Include="Services\UnidadesService.cs" />

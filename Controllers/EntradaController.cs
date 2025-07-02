@@ -19,6 +19,7 @@ namespace SistemadeAlmacenAPI.Controllers
             _entradaService = new EntradaService();
         }
 
+        #region Registrar Entradas y Detalles
         [HttpPost]
         [Route("RegistrarEntradayDetalles")]
 
@@ -37,5 +38,63 @@ namespace SistemadeAlmacenAPI.Controllers
                 return InternalServerError(new Exception("Ocurrió un error al registrar la entrada: " + ex.Message));
             }
         }
+        #endregion
+
+        #region Obtener Entradas por sede
+        [HttpGet]
+        [Route("ObtenerEntradasporSede")]
+        public IHttpActionResult ObtenerEntradasporSede(int idSede)
+        {
+            try
+            {
+                var entradas = _entradaService.ObtenerEntradasporSede(idSede);
+                if (entradas == null || entradas.Count == 0) 
+                    return NotFound();
+                return Ok(entradas);
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(new Exception("Error al obtener entradas: " + ex.Message)); 
+            }
+        }
+        #endregion
+
+        #region Modificar Entrada y Detalles
+        [HttpPut]
+        [Route("ActualizarEntradayDetalles")]
+
+        public IHttpActionResult ActualizarEntradayDetalles(int idEntrada, GetEntradasDto dto)
+        {
+            if (dto == null) return BadRequest("Datos Invalidos");
+
+            try
+            {
+                var actualizado = _entradaService.ActualizarEntradayDetalles(idEntrada, dto);
+                if(!actualizado)
+                    return NotFound();
+                return Ok("Entrada y Detalles Actualizados Correctamente!");
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(new Exception("Error al actualizar la entrada: " + ex.Message));
+            }
+        }
+        // Json que se debe de enviar
+//        {
+//          "ID_Entradas": 7,
+//          "Comentarios": "prueba de Cambio",
+//          "ID_Proveedores": 1,
+//          "ID_Movimiento": 2,
+//          "ID_Sede": 1,
+//          "Detalles": [
+//        {
+//          "ID_Articulo": 8,
+//          "Cantidad": 10,
+//          "Precio_Unitario": 10
+//        }
+//           ]
+//        }
+        #endregion
     }
 }

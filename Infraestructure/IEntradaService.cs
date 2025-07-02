@@ -9,6 +9,8 @@ namespace SistemadeAlmacenAPI.Infraestructure
 {
     public interface IEntradaService
     {
+        bool ActualizarEntradayDetalles(int idEntrada, GetEntradasDto dto);
+        List<GetEntradasDto> ObtenerEntradasporSede(int idSede);
         bool RegistrarEntradayDetalles(EntradasDto entradasdto);
     }
 }

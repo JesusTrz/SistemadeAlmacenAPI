@@ -39,6 +39,8 @@ namespace SistemadeAlmacenAPI.Models
     public class GetDetallesEntradasDto
     {
         public int? ID_Articulo { get; set; }
+        public string Nombre_Articulo { get; set; }
+        public string Nombre_Unidad { get; set; }
         public int? Cantidad { get; set; }
         public decimal? Precio_Unitario { get; set; }
         public decimal? Total { get; set; }

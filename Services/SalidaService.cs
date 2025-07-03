@@ -108,6 +108,8 @@ namespace SistemadeAlmacenAPI.Services
                     Detalles = s.Detalle_Salida.Select(d => new GetDetalleSalidasDto
                     {
                         ID_Articulo = d.ID_Articulo,
+                        Nombre_Articulo = d.Articulo.Nombre_Articulo,
+                        Nombre_Unidad = d.Articulo.Unidades_Medida.Nombre_Unidad,
                         Cantidad = d.Cantidad,
                         Precio_Unitario = d.Precio_Unitario,
                         Total = d.Total

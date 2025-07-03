@@ -46,6 +46,8 @@ namespace SistemadeAlmacenAPI.Models
     public class GetDetalleSalidasDto
     {
         public Nullable<int> ID_Articulo { get; set; }
+        public string Nombre_Articulo { get; set; }
+        public string Nombre_Unidad { get; set; }
         public Nullable<int> Cantidad { get; set; }
         public Nullable<decimal> Total { get; set; }
         public Nullable<decimal> Precio_Unitario { get; set; }

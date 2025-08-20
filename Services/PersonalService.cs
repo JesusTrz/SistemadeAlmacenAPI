@@ -24,7 +24,6 @@ namespace SistemadeAlmacenAPI.Services
             {
                 ID_Personal = personal.ID_Personal,
                 Nombre = personal.Nombre,  
-                Apellidos = personal.Apellidos,
                 ID_Sede = personal.ID_Sede
             }).ToList();
         }
@@ -42,7 +41,6 @@ namespace SistemadeAlmacenAPI.Services
                 {
                     ID_Personal = personal.ID_Personal,
                     Nombre = personal.Nombre,
-                    Apellidos = personal.Apellidos,
                     ID_Sede = personal.ID_Sede
                 };
             }
@@ -56,7 +54,6 @@ namespace SistemadeAlmacenAPI.Services
                 {
                     ID_Personal = i.ID_Personal,
                     Nombre = i.Nombre,
-                    Apellidos = i.Apellidos,
                     ID_Sede = i.ID_Sede
                 }).ToList();
             return result;
@@ -74,7 +71,6 @@ namespace SistemadeAlmacenAPI.Services
                 {
                     ID_Personal = i.ID_Personal,
                     Nombre = i.Nombre,
-                    Apellidos = i.Apellidos,
                     ID_Sede = i.ID_Sede
                 }).ToList();
             return result;
@@ -94,7 +90,6 @@ namespace SistemadeAlmacenAPI.Services
                 var nuevoPersonal = new Personal
                 {
                     Nombre = personal.Nombre,
-                    Apellidos = personal.Apellidos,
                     ID_Sede = personal.ID_Sede
                 };
                 _context.Personal.Add(nuevoPersonal);
@@ -122,9 +117,6 @@ namespace SistemadeAlmacenAPI.Services
 
                 if(!string.IsNullOrEmpty(personalDatos.Nombre))
                     personalExistente.Nombre = personalDatos.Nombre;
-
-                if (!string.IsNullOrEmpty(personalDatos.Apellidos))
-                    personalExistente.Apellidos = personalDatos.Apellidos;
 
                 if (personalDatos.ID_Sede.HasValue)
                 {

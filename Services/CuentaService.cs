@@ -107,7 +107,7 @@ namespace SistemadeAlmacenAPI.Services
         }
         #endregion
 
-        #region Eliminar Proveedor
+        #region Eliminar Cuenta
         public bool DeleteCuenta(int id)
         {
             try
@@ -118,9 +118,11 @@ namespace SistemadeAlmacenAPI.Services
                     return false;
                 }
 
-                //Elimina la Relacion de Proveedor con la de entradas
-                var deleteCuenta = _context.Linea.Where(dc => dc.ID_Cuenta == id).ToList();
-                _context.Linea.RemoveRange(deleteCuenta);
+                var lineUso = _context.Linea.Any(l=>l.ID_Cuenta == id);
+                if (lineUso)
+                {
+                    throw new Exception("No se puede eliminar la cuenta porque esta en uso!");
+                }
 
                 _context.Cuenta.Remove(cuenta);
                 _context.SaveChanges();

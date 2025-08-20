@@ -4,28 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ae1f97548a4c481bb61bdb22bf98057d" Name="Diagram1" ZoomLevel="71">
+      <Diagram DiagramId="ae1f97548a4c481bb61bdb22bf98057d" Name="Diagram1" ZoomLevel="61">
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Centro_Costo" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Cuenta" Width="1.5" PointX="1.5" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Entradas" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Linea" Width="1.5" PointX="3.75" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Movimientos" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Personal" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Proveedores" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Roles" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Salidas" Width="1.5" PointX="5.25" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Sedes" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Unidades" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
-        <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Unidades_Medida" Width="1.5" PointX="3.75" PointY="23.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Usuarios" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
         <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Salidas__ID_CenC__6383C8BA" ManuallyRouted="false" />
         <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Linea__ID_Cuenta__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Entradas__ID_Mov__52593CB8" ManuallyRouted="false" />
-        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Entradas__ID_Pro__534D60F1" ManuallyRouted="false" />
-        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Entradas__ID_Sed__5441852A" ManuallyRouted="false" />
         <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Salidas__ID_Movi__628FA481" ManuallyRouted="false" />
-        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Personal__ID_Sed__5FB337D6" ManuallyRouted="false" />
-        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Salidas__ID_Pers__656C112C" ManuallyRouted="false" />
         <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Usuarios__ID_Rol__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Salidas__ID_Sede__66603565" ManuallyRouted="false" />
         <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Salidas__ID_Unid__6477ECF3" ManuallyRouted="false" />
@@ -34,15 +26,23 @@
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Articulo" Width="1.5" PointX="6" PointY="10" />
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Inventario" Width="1.5" PointX="11.25" PointY="9.875" />
         <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Articulo__ID_Lin__45F365D3" />
-        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Articulo__ID_Med__46E78A0C" />
         <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Inventari__ID_Ar__4AB81AF0" />
         <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Inventari__ID_Se__49C3F6B7" />
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Detalle_Entrada" Width="1.5" PointX="8.25" PointY="10.25" />
         <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Detalle_Salida" Width="1.5" PointX="8.25" PointY="13.75" />
         <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Detalle_E__ID_Ar__5812160E" />
         <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Detalle_S__ID_Ar__6A30C649" />
-        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Detalle_E__ID_En__571DF1D5" />
         <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Detalle_S__ID_Sa__693CA210" />
+        <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Entradas" Width="1.5" PointX="3" PointY="10" />
+        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Detalle_E__ID_En__571DF1D5" />
+        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Entradas__ID_Mov__52593CB8" />
+        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Entradas__ID_Pro__534D60F1" />
+        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Entradas__ID_Sed__5441852A" />
+        <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Personal" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="Sistema_de_AlmacenModel.Unidades_Medida" Width="1.5" PointX="3.75" PointY="25" />
+        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Articulo__ID_Med__46E78A0C" />
+        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Personal__ID_Sed__5FB337D6" />
+        <AssociationConnector Association="Sistema_de_AlmacenModel.FK__Salidas__ID_Pers__656C112C" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

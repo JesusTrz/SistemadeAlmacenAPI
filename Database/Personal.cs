@@ -22,7 +22,6 @@ namespace SistemadeAlmacenAPI.Database
     
         public int ID_Personal { get; set; }
         public string Nombre { get; set; }
-        public string Apellidos { get; set; }
         public Nullable<int> ID_Sede { get; set; }
     
         public virtual Sedes Sedes { get; set; }

@@ -83,7 +83,7 @@ namespace SistemadeAlmacenAPI.Controllers
                 var result = _personalService.CreatePersonal(personal);
                 if (result)
                 {
-                    return Ok($"La Persona '{personal.Nombre + personal.Apellidos}' Fue Agregada con Exito!");
+                    return Ok($"La Persona '{personal.Nombre}' Fue Agregada con Exito!");
                 }
                 else
                 {

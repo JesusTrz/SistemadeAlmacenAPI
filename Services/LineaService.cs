@@ -91,7 +91,7 @@ namespace SistemadeAlmacenAPI.Services
                 var lineaExistente = _context.Linea.FirstOrDefault(x => x.ID_Linea == id);
                 if (lineaExistente == null)
                 {
-                    return false;
+                    throw new Exception("La Linea no Existe!");
                 }
                 if (!string.IsNullOrEmpty(datosLinea.Nombre_Linea))
                     lineaExistente.Nombre_Linea = datosLinea.Nombre_Linea;
@@ -130,8 +130,11 @@ namespace SistemadeAlmacenAPI.Services
                     return false;
                 }
 
-                var deleteLinea = _context.Articulo.Where(dl => dl.ID_Linea == id).ToList();
-                _context.Articulo.RemoveRange(deleteLinea);
+                var lineaUso = _context.Articulo.Any(a => a.ID_Linea == id);
+                if (lineaUso)
+                {
+                    throw new Exception("No se puede eliminar la linea porque esta en uso!");
+                }
 
                 _context.Linea.Remove(linea);
                 _context.SaveChanges();

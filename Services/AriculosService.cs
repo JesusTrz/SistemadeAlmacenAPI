@@ -54,8 +54,18 @@ namespace SistemadeAlmacenAPI.Services
 
         #region Crear nuevos Articulos
         public bool CreateArticulo(ArticulosDatos articulo)
-        {
-            if(articulo == null) throw new ArgumentNullException(nameof(articulo), "Los datos no pueden ser nulos.");
+        {     
+
+            if(articulo == null)
+            {
+                throw new Exception("El Articulo no puede contener datos vacios!");
+            }
+
+            var articuloExistente = _context.Articulo.Any(a => a.Nombre_Articulo == articulo.Nombre_Articulo);
+            if (articuloExistente)
+            {
+                throw new Exception("El Articulo ya Existe!");
+            }
 
             try
             {
@@ -129,8 +139,12 @@ namespace SistemadeAlmacenAPI.Services
                 var articulo = _context.Articulo.FirstOrDefault(a=>a.ID_Articulo == id);
                 if(articulo == null) return false;
 
-                var articuloInventario = _context.Inventario.Where(i => i.ID_Articulo == id).ToList();
-                _context.Inventario.RemoveRange(articuloInventario);
+                bool articuloUso = _context.Inventario.Any(i => i.ID_Articulo == id);
+                if (articuloUso)
+                {
+                    throw new Exception("No se puede eliminar el articulo porque esta en uso!");
+                }
+
                 _context.Articulo.Remove(articulo);
                 _context.SaveChanges();
                 return true;

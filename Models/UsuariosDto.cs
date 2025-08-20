@@ -50,6 +50,5 @@ namespace SistemadeAlmacenAPI.Models
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$",
         ErrorMessage = "La contraseña debe tener al menos una mayúscula, una minúscula y un número.")]
         public string Contrasenia { get; set; }
-        public int ID_Sede { get; set; }
     }
 }

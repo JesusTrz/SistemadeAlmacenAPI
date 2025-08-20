@@ -27,20 +27,20 @@ namespace SistemadeAlmacenAPI.Database
     
         public virtual DbSet<Centro_Costo> Centro_Costo { get; set; }
         public virtual DbSet<Cuenta> Cuenta { get; set; }
-        public virtual DbSet<Entradas> Entradas { get; set; }
         public virtual DbSet<Linea> Linea { get; set; }
         public virtual DbSet<Movimientos> Movimientos { get; set; }
-        public virtual DbSet<Personal> Personal { get; set; }
         public virtual DbSet<Proveedores> Proveedores { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Salidas> Salidas { get; set; }
         public virtual DbSet<Sedes> Sedes { get; set; }
         public virtual DbSet<Unidades> Unidades { get; set; }
-        public virtual DbSet<Unidades_Medida> Unidades_Medida { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Articulo> Articulo { get; set; }
         public virtual DbSet<Inventario> Inventario { get; set; }
         public virtual DbSet<Detalle_Entrada> Detalle_Entrada { get; set; }
         public virtual DbSet<Detalle_Salida> Detalle_Salida { get; set; }
+        public virtual DbSet<Entradas> Entradas { get; set; }
+        public virtual DbSet<Personal> Personal { get; set; }
+        public virtual DbSet<Unidades_Medida> Unidades_Medida { get; set; }
     }
 }

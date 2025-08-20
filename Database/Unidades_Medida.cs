@@ -22,6 +22,7 @@ namespace SistemadeAlmacenAPI.Database
     
         public int ID_Medida { get; set; }
         public string Nombre_Unidad { get; set; }
+        public string Descripcion_Unidad { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Articulo> Articulo { get; set; }

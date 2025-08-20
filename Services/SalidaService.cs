@@ -103,7 +103,6 @@ namespace SistemadeAlmacenAPI.Services
                     Numero_Placa = s.Unidades.Numero_Placa,
                     ID_Personal = s.ID_Personal,
                     Nombre = s.Personal.Nombre,
-                    Apellidos = s.Personal.Apellidos,
                     Comentarios = s.Comentarios,
                     Detalles = s.Detalle_Salida.Select(d => new GetDetalleSalidasDto
                     {

@@ -17,8 +17,8 @@ namespace SistemadeAlmacenAPI.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Movimientos()
         {
-            this.Entradas = new HashSet<Entradas>();
             this.Salidas = new HashSet<Salidas>();
+            this.Entradas = new HashSet<Entradas>();
         }
     
         public int ID_Movimiento { get; set; }
@@ -27,8 +27,8 @@ namespace SistemadeAlmacenAPI.Database
         public string Tipo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Entradas> Entradas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Salidas> Salidas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Entradas> Entradas { get; set; }
     }
 }

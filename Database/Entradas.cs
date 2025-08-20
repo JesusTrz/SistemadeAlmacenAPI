@@ -27,11 +27,12 @@ namespace SistemadeAlmacenAPI.Database
         public Nullable<int> ID_Proveedores { get; set; }
         public string Comentarios { get; set; }
         public Nullable<int> ID_Sede { get; set; }
+        public string Referencias { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Detalle_Entrada> Detalle_Entrada { get; set; }
         public virtual Movimientos Movimientos { get; set; }
         public virtual Proveedores Proveedores { get; set; }
         public virtual Sedes Sedes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Detalle_Entrada> Detalle_Entrada { get; set; }
     }
 }

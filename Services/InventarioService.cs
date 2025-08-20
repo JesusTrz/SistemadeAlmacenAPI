@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Web;
+using System.Text.RegularExpressions;
 
 namespace SistemadeAlmacenAPI.Services
 {
@@ -197,9 +197,23 @@ namespace SistemadeAlmacenAPI.Services
                 var inventario = _context.Inventario.FirstOrDefault(i=>i.ID_Inventario == idInv);
                 if (inventario == null) return false;
 
-                inventario.Ubicacion = string.IsNullOrEmpty(datos.Ubicacion) ? "Sin Ubicacion" : datos.Ubicacion;
+                //inventario.Ubicacion = string.IsNullOrEmpty(datos.Ubicacion) ? "Sin Ubicacion" : datos.Ubicacion;
 
-               if(datos.Stock_Actual.HasValue)
+                if (!string.IsNullOrWhiteSpace(datos.Ubicacion))
+                {
+                    var regex = new Regex("^[a-zA-Z0-9]+$");
+
+                    if (!regex.IsMatch(datos.Ubicacion))
+                        throw new Exception("La Ubicación solo debe contener letras, números y espacios.");
+
+                    inventario.Ubicacion = datos.Ubicacion;
+                }
+                else
+                {
+                    inventario.Ubicacion = "Sin Ubicacion";
+                }
+
+                if(datos.Stock_Actual.HasValue)
                     inventario.Stock_Actual = datos.Stock_Actual.Value;
 
                 if (datos.Stock_Minimo.HasValue)
@@ -207,9 +221,6 @@ namespace SistemadeAlmacenAPI.Services
 
                 if (datos.Stock_Maximo.HasValue)
                     inventario.Stock_Maximo = datos.Stock_Maximo.Value;
-
-                if(!string.IsNullOrEmpty(datos.Ubicacion))
-                    inventario.Ubicacion = datos.Ubicacion;
 
                 if (datos.Costo_Promedio.HasValue)
                     inventario.Costo_Promedio = datos.Costo_Promedio.Value;

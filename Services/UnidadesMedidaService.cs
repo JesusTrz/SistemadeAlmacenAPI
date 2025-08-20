@@ -23,7 +23,8 @@ namespace SistemadeAlmacenAPI.Services
             return _context.Unidades_Medida.Select(umedida => new UnidadesMedidaDto
             {
                 ID_Medida = umedida.ID_Medida,
-                Nombre_Unidad = umedida.Nombre_Unidad
+                Nombre_Unidad = umedida.Nombre_Unidad,
+                Descripcion_Unidad = umedida.Descripcion_Unidad
             }).ToList();
         }
 
@@ -39,7 +40,8 @@ namespace SistemadeAlmacenAPI.Services
                 return new UnidadesMedidaDto
                 {
                     ID_Medida = umedida.ID_Medida,
-                    Nombre_Unidad = umedida.Nombre_Unidad
+                    Nombre_Unidad = umedida.Nombre_Unidad,
+                    Descripcion_Unidad = umedida.Descripcion_Unidad
                 };
             }
         }
@@ -52,11 +54,19 @@ namespace SistemadeAlmacenAPI.Services
             {
                 throw new ArgumentException(nameof(umedidanom), "Los Datos no pueden ser vacios.");
             }
+
             try
             {
+                var unidadmedidaExiste = _context.Unidades_Medida.Any(um=>um.Nombre_Unidad == umedidanom.Nombre_Unidad);
+                if (unidadmedidaExiste)
+                {
+                    throw new Exception("El Nombre de Unidad ya existe!");
+                }
+
                 var nuevaMedida = new Unidades_Medida
                 {
-                    Nombre_Unidad = umedidanom.Nombre_Unidad
+                    Nombre_Unidad = umedidanom.Nombre_Unidad,
+                    Descripcion_Unidad = umedidanom.Descripcion_Unidad
                 };
                 _context.Unidades_Medida.Add(nuevaMedida);
                 _context.SaveChanges();
@@ -77,9 +87,17 @@ namespace SistemadeAlmacenAPI.Services
                 var unidadExistente = _context.Unidades_Medida.FirstOrDefault(x=>x.ID_Medida == id);
                 if (unidadExistente == null)
                 {
-                    return false;
+                    throw new Exception("La Unidad de medida no Existe!");
                 }
+
+                var unidadmedidaExiste = _context.Unidades_Medida.Any(um => um.Nombre_Unidad == umedidanom.Nombre_Unidad);
+                if (unidadmedidaExiste)
+                {
+                    throw new Exception("El Nombre de Unidad de medida ya existe!");
+                }
+
                 unidadExistente.Nombre_Unidad = umedidanom.Nombre_Unidad;
+                unidadExistente.Descripcion_Unidad = umedidanom.Descripcion_Unidad;
                 _context.SaveChanges();
                 return true;
             }

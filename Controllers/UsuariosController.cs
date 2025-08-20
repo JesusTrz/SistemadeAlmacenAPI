@@ -44,6 +44,22 @@ namespace SistemadeAlmacenAPI.Controllers
                 return BadRequest("Usuario no Encontrado");
             }
         }
+
+        [HttpGet]
+        [Route("GetUsuariosByIdSede/{IdSede}")]
+
+        public IHttpActionResult GetUsuarioByIdSede(int idSede)
+        {
+            var result = _usuariosService.GetUsuarioByIdSede(idSede);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest("Usuarios no Encontrados");
+            }
+        }
         #endregion
 
         #region Crear Nuevos Usuarios
@@ -66,13 +82,13 @@ namespace SistemadeAlmacenAPI.Controllers
         }
         #endregion
 
-        #region Editar Contraseña
+        #region Editar Contraseña y Nombre
         [HttpPut]
         [Route("UpdatePassword/{id}")]
 
         public IHttpActionResult UpdatePassword(CambioContrasenia camcontra)
         {
-            if(camcontra == null) throw new Exception("Los datos de la solicitud son invalidos");
+            if (camcontra == null) throw new Exception("Los datos de la solicitud son invalidos");
 
             try
             {
@@ -89,6 +105,27 @@ namespace SistemadeAlmacenAPI.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdateName")]
+
+        public IHttpActionResult CambiarNombre(int idUsuario, UsuariosDto usuariosDto)
+        {
+            if(usuariosDto == null || string.IsNullOrWhiteSpace(usuariosDto.Nombre_Usuario))
+            {
+                return BadRequest("Nombre Invalido");
+            }
+
+            var result = _usuariosService.CambiarNombre(idUsuario, usuariosDto);
+            if (result)
+            {
+                return Ok("Nombre Actualizado con Exito!");
+            }
+            else
+            {
+                return BadRequest("Ocurrio un error al cambiar el nombre.");
             }
         }
         #endregion
@@ -115,14 +152,23 @@ namespace SistemadeAlmacenAPI.Controllers
         [HttpPost]
         [Route("api/login")]
 
-        public IHttpActionResult Login(LoginUser login)
+        public IHttpActionResult ValidarLogin(string nombreUsuario, string contrasenia)
         {
-            var service = new UsuariosService();
+            if (nombreUsuario == null)
+                return BadRequest("Debes Ingresar un Nombre de Usuario");
 
-            bool valido = service.ValidarLogin(login.Nombre_Usuario, login.Contrasenia, login.ID_Sede);
+            if (nombreUsuario == null)
+                return BadRequest("Debes Ingresar la Contraseña!");
 
-            if (valido) return Ok($"El Usuario {login.Nombre_Usuario} fue Autenticado correctamente!");
-            return Unauthorized();
+            var result = _usuariosService.ValidarLogin(nombreUsuario, contrasenia);
+            if (result)
+            {
+                return Ok($"Bienvenido {nombreUsuario}");
+            }
+            else
+            {
+                return BadRequest("Ocurrio un error al iniciar sesion");
+            }
         }
         #endregion
     }

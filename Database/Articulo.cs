@@ -30,12 +30,12 @@ namespace SistemadeAlmacenAPI.Database
         public Nullable<int> ID_Medida { get; set; }
     
         public virtual Linea Linea { get; set; }
-        public virtual Unidades_Medida Unidades_Medida { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventario> Inventario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalle_Entrada> Detalle_Entrada { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalle_Salida> Detalle_Salida { get; set; }
+        public virtual Unidades_Medida Unidades_Medida { get; set; }
     }
 }

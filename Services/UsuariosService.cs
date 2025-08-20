@@ -51,6 +51,20 @@ namespace SistemadeAlmacenAPI.Services
                 };
             }
         }
+
+        public List<UsuariosDto> GetUsuarioByIdSede(int idSede)
+        {
+            var result = _context.Usuarios
+                .Where(u => u.ID_Sede == idSede)
+                .Select(u => new UsuariosDto
+                {
+                    ID_Usuario = u.ID_Usuario,
+                    Nombre_Usuario = u.Nombre_Usuario,
+                    ID_Roles = u.ID_Roles,
+                    ID_Sede = u.ID_Sede
+                }).ToList();
+            return result;
+        }
         #endregion
 
         #region Crear Nuevos Usuarios
@@ -62,6 +76,12 @@ namespace SistemadeAlmacenAPI.Services
             }
             try
             {
+                var usuarioExistente = _context.Usuarios.Any(u => u.Nombre_Usuario == usuarioDatos.Nombre_Usuario);
+                if (usuarioExistente)
+                {
+                    throw new Exception("El nombre de usuario ya existe!");
+                }
+
                 var sedeExistente = _context.Sedes.Any(s => s.ID_Sede == usuarioDatos.ID_Sede);
                 if (!sedeExistente)
                 {
@@ -98,7 +118,7 @@ namespace SistemadeAlmacenAPI.Services
         }
         #endregion
 
-        #region Editar Contraseña de Usuario
+        #region Editar Contraseña de Usuario y Nombre
         public bool UpdatePassword(CambioContrasenia camcontra)
         {
             try
@@ -122,6 +142,26 @@ namespace SistemadeAlmacenAPI.Services
             catch (Exception ex)
             {
                 throw new Exception("Error al actualizar la contraseña: " + ex.Message);
+            }
+        }
+
+        public bool CambiarNombre(int idUsuario, UsuariosDto usuariosDto)
+        {
+            try
+            {
+                var usuario = _context.Usuarios.FirstOrDefault(u => u.ID_Usuario == idUsuario);
+                if(usuario == null)
+                {
+                    throw new Exception("Usuario no encontrado");
+                }
+
+                usuario.Nombre_Usuario = usuariosDto.Nombre_Usuario;
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al Actualizar el nombre del Usuario: " + ex.Message);
             }
         }
         #endregion
@@ -148,15 +188,14 @@ namespace SistemadeAlmacenAPI.Services
         #endregion
 
         #region Login
-        public bool ValidarLogin(string nombreUsuario, string contrasenia, int idSede)
+        public bool ValidarLogin(string nombreUsuario, string contrasenia)
         {
 
             string hashedpassword = HashPassword(contrasenia);
 
             var usuario = _context.Usuarios.FirstOrDefault(u =>
             u.Nombre_Usuario == nombreUsuario &&
-            u.Contrasenia == hashedpassword &&
-            u.ID_Sede == idSede);
+            u.Contrasenia == hashedpassword);
 
             return usuario != null;
         }
